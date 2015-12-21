@@ -1,0 +1,37 @@
+- hosts: new
+  sudo: yes
+
+  vars:
+    ansible_admin_user: aau
+    remote_pkg_name: libselinux-python
+
+  tasks:
+    - name: Installing -> {{remote_pkg_name}}
+      yum: 
+        pkg={{remote_pkg_name}}
+        state=present
+      when: ansible_distribution == "CentOS" or ansible_distribution == "RedHat"
+
+    - name: Create -> Ansible Admin User
+      user:
+       name="{{ansible_admin_user}}"
+       shell=/bin/bash
+       comment="Ansible Admin User"
+       append=yes
+
+    - name: Update -> Authorized keys for Ansible Admin User
+      authorized_key: 
+       user={{ansible_admin_user}} 
+       key="{{ lookup('file', '/home/ansible/.ssh/id_rsa.pub') }}"
+       state=present
+
+    - name: add sudo user no password
+      lineinfile: 
+       dest: "/etc/sudoers.d/{{ansible_admin_user}}"
+       line: "%{{ansible_admin_user}} ALL=(ALL) NOPASSWD: ALL"
+       create: yes
+       state: present
+       mode: 0440
+       owner: root
+       group: root
+
