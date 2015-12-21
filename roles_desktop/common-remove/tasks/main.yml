@@ -1,0 +1,22 @@
+---
+- name: Remove ->  Unused Soft
+  apt:
+    pkg={{ item }}
+    state=absent
+  with_items:
+    - deja-dup
+    - aisleriot
+    - gnome-sudoku
+    - gnome-mahjongg
+    - gnome-mines
+    - empathy
+    - unity-scope-gdrive
+    - rhythmbox
+    - landscape-client-ui-install
+    - gnome-orca
+    - printer-driver-foo2zjs-common
+    - evolution-data-server
+    - unity-webapps-common
+    - unity-lens-*
+
+

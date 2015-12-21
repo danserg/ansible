@@ -1,0 +1,10 @@
+---
+- name: Docker -> Rancher
+  docker:
+    name: rancher-serv
+    image: rancher/server
+    state: present
+    ports:
+    - "8080:8080"
+
+- name: Docker -> Set Rancher as Service

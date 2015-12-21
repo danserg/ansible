@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Rancher container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a {{docker-rancher.container_name}}
+ExecStop=/usr/bin/docker stop -t 2 {{docker-rancher.container_name}}
+
+[Install]
+WantedBy=local.target

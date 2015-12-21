@@ -1,0 +1,11 @@
+---
+
+- name: Add Repository
+  apt_repository:
+    repo='ppa:starws-box/deadbeef-player'
+
+- name: Installing DeadBeef player
+  apt:
+    name=deadbeef
+    state=present
+

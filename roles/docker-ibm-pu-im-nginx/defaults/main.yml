@@ -1,0 +1,13 @@
+---
+
+ibm_pu_im_package_name: "pu.offering.disk.linux.gtk.x86_64_1.8.2001.20150409_1849.zip"
+ibm_pu_im_package_temp_path: /tmp/_ibm
+
+ibm_im_version: "1.8.2001.20150409_1833"
+ibm_pu_version: "1.8.2001.20150409_1849"
+
+ibm_pu_im_install_path: /opt/IBM
+ibm_pu_repository_path: /opt/IBM/Repository
+ibm_pu_incoming_path: /opt/Incoming
+
+docker_ibm_pu_im_image_name: ibm-pu

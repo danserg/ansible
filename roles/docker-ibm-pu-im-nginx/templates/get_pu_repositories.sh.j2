@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker run -ti --rm -v /opt/IBM/Repository:/opt/IBM/Repository ibm-pu /opt/IBM/PackagingUtility/PUCL listAvailablePackages -repositories /opt/IBM/Repository/* -showPlatforms -long | awk -F ":" '{print $1, $3, $4, $5 }'

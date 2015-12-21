@@ -1,0 +1,14 @@
+---
+
+- name: Download -> Google Chrome
+  get_url:
+    url=https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    dest=/tmp/google-chrome-stable_current_amd64.deb
+    mode=0440
+
+- name: Install -> Google Chrome
+  apt:
+    deb=/tmp/google-chrome-stable_current_amd64.deb
+
+
+

@@ -1,0 +1,3 @@
+---
+docker-rancher:
+  container_name: rancher_srv

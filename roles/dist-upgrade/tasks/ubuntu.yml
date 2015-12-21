@@ -1,0 +1,11 @@
+- name: Debug
+  debug: msg="{{ansible_os_family}}"
+
+- name: Update -> repo cache
+  apt:
+    update_cache=yes
+
+- name: Upgrade -> all packages to the latest version
+  apt:
+    upgrade=dist
+    state=latest

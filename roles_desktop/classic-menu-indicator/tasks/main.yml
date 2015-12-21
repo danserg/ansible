@@ -1,0 +1,11 @@
+---
+
+- name: Add Repo -> Classic Menu Indicator
+  apt_repository:
+    repo='ppa:diesch/testing'
+
+- name: Install -> Classic Menu Indicator
+  apt:
+    name=classicmenu-indicator
+    state=present
+

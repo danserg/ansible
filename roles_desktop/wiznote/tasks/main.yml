@@ -1,0 +1,11 @@
+---
+
+- name: Add -> Repo WizNote
+  apt_repository:
+    repo='ppa:wiznote-team'
+
+- name: Install -> WizNote
+  apt:
+    name=wiznote
+    state=present
+

@@ -1,0 +1,11 @@
+---
+
+- name: Docker -> Rancher-Agent
+  shell: docker {{docker_rancher_agent_vars}}
+
+
+
+#- name: Docker -> Set Rancher as Service
+
+
+

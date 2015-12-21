@@ -1,0 +1,25 @@
+---
+- hosts: CentOS
+  sudo: yes
+  roles:
+#    - dist-upgrade
+#    - common-install
+#    - deadbeef
+#    - virtualbox-server
+#    - virtualbox-dkms
+#    - oracle-java
+#    - wiznote
+#    - classic-menu-indicator
+#    - docker
+#    - dropbox
+#    - google-chrome
+#    - google-earth
+#    - skype
+#    - common-remove
+#    - common-changes
+#    - docker-rancher
+    - bootstrap-remote
+
+
+
+  tags: preconf

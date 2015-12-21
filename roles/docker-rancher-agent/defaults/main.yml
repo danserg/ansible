@@ -1,0 +1,2 @@
+
+docker_rancher_agent_vars: "--privileged -v /var/run/docker.sock:/var/run/docker.sock rancher/agent:v0.7.6 http://192.168.56.101:8080/v1/scripts/1AC083547BAD34FD3A0A:1432814400000:GjKVEXM8JO8xVguGY4cSdSJbEg"

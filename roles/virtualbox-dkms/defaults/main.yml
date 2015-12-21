@@ -1,0 +1,3 @@
+dkms_pkg_name:
+    - make
+    - gcc

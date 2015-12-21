@@ -1,0 +1,40 @@
+---
+- name: Creates directory
+  file:
+    path=/home/{{item}}
+    state=directory
+    owner=aerus
+    group=aerus
+    mode=0774
+  with_items:
+    - Cloud_Sync
+    - Downloads
+    - Develop
+    - VirtualVM
+    - Utils
+
+#- name: write current user homedir .bashrc
+#  copy:
+#    src=.bashrc
+#    dest=/home/aerus/.bashrc
+#    owner=aerus
+#    group=aerus
+#    mode=0644
+
+- name: debug
+  debug:
+    msg="{{ansible_eth1.ipv4.address}}"
+
+- name: Change /etc/host
+  template:
+    src=hosts.j2
+    dest=/etc/hosts
+    owner=root
+    group=root
+    mode=0644
+
+
+
+
+
+

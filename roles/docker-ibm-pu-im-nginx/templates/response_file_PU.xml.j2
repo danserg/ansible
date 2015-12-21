@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<agent-input>
+  <variables>
+    <variable name='sharedLocation' value='{{ibm_pu_im_install_path}}/Shared'/>
+  </variables>
+  <server>
+    <repository location='{{ibm_pu_im_package_temp_path}}/disk_linux.gtk.x86_64'/>
+    <repository location='{{ibm_pu_im_package_temp_path}}/disk_linux.gtk.x86_64/InstallerImage_linux.gtk.x86_64'/>
+  </server>
+  <profile id='IBM Installation Manager' installLocation='{{ibm_pu_im_install_path}}/InstallationManager/eclipse' kind='self'>
+    <data key='eclipseLocation' value='{{ibm_pu_im_install_path}}/InstallationManager/eclipse'/>
+    <data key='user.import.profile' value='false'/>
+    <data key='cic.selector.os' value='linux'/>
+    <data key='cic.selector.arch' value='x86_64'/>
+    <data key='cic.selector.ws' value='gtk'/>
+    <data key='cic.selector.nl' value='en'/>
+  </profile>
+  <install modify='false'>
+    <!-- IBM® Installation Manager 1.8.2.1 -->
+    <offering profile='IBM Installation Manager' id='com.ibm.cic.agent' version='{{ibm_im_version}}' features='agent_core,agent_jre,agent_web' installFixes='none'/>
+  </install>
+  <profile id='IBM Packaging Utility' installLocation='{{ibm_pu_im_install_path}}/PackagingUtility'>
+    <data key='eclipseLocation' value='{{ibm_pu_im_install_path}}/PackagingUtility'/>
+    <data key='user.import.profile' value='false'/>
+    <data key='cic.selector.os' value='linux'/>
+    <data key='cic.selector.arch' value='x86_64'/>
+    <data key='cic.selector.ws' value='gtk'/>
+    <data key='cic.selector.nl' value='en'/>
+  </profile>
+  <install modify='false'>
+    <!-- IBM® Packaging Utility 1.8.2.1 -->
+    <offering profile='IBM Packaging Utility' id='com.ibm.cic.packagingUtility' version='{{ibm_pu_version}}' features='packaging_utility,jre' installFixes='none'/>
+  </install>
+  <preference name='com.ibm.cic.common.core.preferences.eclipseCache' value='${sharedLocation}'/>
+  <preference name='com.ibm.cic.common.core.preferences.connectTimeout' value='30'/>
+  <preference name='com.ibm.cic.common.core.preferences.readTimeout' value='45'/>
+  <preference name='com.ibm.cic.common.core.preferences.downloadAutoRetryCount' value='0'/>
+  <preference name='offering.service.repositories.areUsed' value='true'/>
+  <preference name='com.ibm.cic.common.core.preferences.ssl.nonsecureMode' value='false'/>
+  <preference name='com.ibm.cic.common.core.preferences.http.disablePreemptiveAuthentication' value='false'/>
+  <preference name='http.ntlm.auth.kind' value='NTLM'/>
+  <preference name='http.ntlm.auth.enableIntegrated.win32' value='true'/>
+  <preference name='com.ibm.cic.common.core.preferences.preserveDownloadedArtifacts' value='true'/>
+  <preference name='com.ibm.cic.common.core.preferences.keepFetchedFiles' value='false'/>
+  <preference name='PassportAdvantageIsEnabled' value='false'/>
+  <preference name='com.ibm.cic.common.core.preferences.searchForUpdates' value='false'/>
+  <preference name='com.ibm.cic.agent.ui.displayInternalVersion' value='false'/>
+  <preference name='com.ibm.cic.common.sharedUI.showErrorLog' value='true'/>
+  <preference name='com.ibm.cic.common.sharedUI.showWarningLog' value='true'/>
+  <preference name='com.ibm.cic.common.sharedUI.showNoteLog' value='true'/>
+</agent-input>

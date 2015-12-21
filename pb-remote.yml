@@ -1,0 +1,24 @@
+---
+- hosts: group_1
+  sudo: yes
+  roles:
+#    - dist-upgrade
+#    - common-install-remote
+#    - virtualbox-dkms
+#    - deadbeef
+#    - virtualbox-server
+#    - oracle-java
+#    - wiznote
+#    - classic-menu-indicator
+#    - docker
+#    - dropbox
+#    - google-chrome
+#    - google-earth
+#    - skype
+#    - common-remove
+#    - common-changes
+#    - docker-rancher
+#    - docker-rancher-agent
+#    - docker-ibm-pu-im-nginx
+    - jenkins-server
+

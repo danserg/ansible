@@ -1,0 +1,5 @@
+#Java RedHat/CentOS
+java_download_url: http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm
+
+#Java Debian/Ubuntu
+java_name_pkg: oracle-java8-installer

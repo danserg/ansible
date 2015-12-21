@@ -1,0 +1,14 @@
+---
+
+- name: Add -> Repo Skype
+  apt_repository:
+    repo="deb http://archive.canonical.com/ubuntu vivid partner"
+    state=present
+
+- name: Install -> Skype
+  apt:
+    name=skype
+    state=present
+
+
+

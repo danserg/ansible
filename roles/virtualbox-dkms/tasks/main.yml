@@ -1,0 +1,29 @@
+---
+# tasks file for dkms
+
+- name: Installing -> kernel-devel (CentOS)
+  yum:
+    pkg={{item}}
+    state=present
+  with_items:
+    - "{{dkms_pkg_name}}"
+    - kernel-devel-{{ansible_kernel}}
+  when: ansible_distribution == "CentOS"
+
+- name: Installing -> kernel-devel (Ubuntu)
+  apt:
+    pkg={{item}}
+    state=present
+  with_items:
+    - "{{dkms_pkg_name}}"
+  when: ansible_distribution == "Ubuntu"
+
+- name: Copy -> VBoxLinuxAdditions.run
+  copy:
+    src=/home/ansible/files/VBoxLinuxAdditions/VBoxLinuxAdditions.run
+    dest=/tmp/VBoxLinuxAdditions.run
+    mode=0774
+
+- name: Install -> VirtualBox Additions
+  shell: /tmp/VBoxLinuxAdditions.run
+  ignore_errors: True

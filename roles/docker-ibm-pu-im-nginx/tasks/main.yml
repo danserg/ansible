@@ -1,0 +1,49 @@
+---
+
+- name: Create -> Repository dir
+  file:
+    path={{ibm_pu_repository_path}}
+    state=directory
+    mode=0700
+
+- name: Create -> Incoming dir
+  file:
+    path={{ibm_pu_incoming_path}}
+    state=directory
+    mode=0700
+
+- name: Create -> ibm package temp dir
+  file:
+    path={{ibm_pu_im_package_temp_path}}
+    state=directory
+    mode=0700
+
+- name: Copy -> ibm_pu_im_package
+  copy:
+    src=/home/ansible/files/IBM_PU_IM/{{ibm_pu_im_package_name}}
+    dest={{ibm_pu_im_package_temp_path}}/ibm_pu_im_package.zip
+
+- name: Change -> Responce file
+  template:
+    src=response_file_PU.xml.j2
+    dest={{ibm_pu_im_package_temp_path}}/response_file_PU.xml
+    mode=0644
+
+- name: Copy -> Dockerfile
+  copy:
+    src=Dockerfile
+    dest={{ibm_pu_im_package_temp_path}}
+
+- name: Docker Build -> ibm-pu image
+      docker_image:
+        path: {{ibm_pu_im_package_temp_path}}
+        name: {{docker_ibm_pu_im_image_name}}
+        state: present
+
+- name: Copy -> run_pu_container.sh
+  template:
+    src=run_pu_container.sh.j2
+    dest=/opt/IBM
+    mode=0700
+
+

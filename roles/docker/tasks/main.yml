@@ -1,0 +1,22 @@
+---
+
+- name: Create -> Graph Storage Dir
+  file:
+    path={{ docker_graph_storage_dir }}
+    state=directory
+    mode=0700
+
+- include: centos.yml
+  when: ansible_distribution == "CentOS"
+
+- include: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install -> docker-py
+  pip: name=docker-py
+
+- name: Install -> Docker-Compose
+  get_url:
+    url={{docker_compose_url}}
+    dest=/usr/local/bin/docker-compose
+    mode=0770

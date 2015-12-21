@@ -1,0 +1,6 @@
+---
+docker_graph_storage_dir: /home/docker
+docker_listen_addresses:
+  - unix:///var/run/docker.sock
+  - tcp://127.0.0.1:4243
+docker_compose_url: https://github.com/docker/compose/releases/download/1.2.0/docker-compose-Linux-x86_64

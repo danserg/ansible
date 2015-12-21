@@ -1,0 +1,17 @@
+- debug: msg="(CentOS/Redhat)"
+
+- name: Remove -> OpenJDK
+  yum:
+    pkg=java-1.*.0-openjdk
+    state=absent
+
+- name: download -> JavaXXX.rpm
+  command: 'wget -O /tmp/oracle_java_jdk.rpm --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" {{java_download_url}}'
+
+- name: Installing -> Oracle Java 8 (CentOS/Redhat)
+  yum:
+    pkg="/tmp/oracle_java_jdk.rpm"
+    state=present
+
+
+

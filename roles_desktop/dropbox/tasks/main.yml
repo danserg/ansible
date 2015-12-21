@@ -1,0 +1,12 @@
+---
+
+- name: Download DropBox agent
+  get_url:
+    url=https://www.dropbox.com/download?dl=packages/ubuntu/{{ dropbox_package_name }}
+    dest=/tmp/{{ dropbox_package_name }}
+    mode=0440
+
+- name: Install Dropbox
+  apt: deb=/tmp/{{ dropbox_package_name }}
+
+
