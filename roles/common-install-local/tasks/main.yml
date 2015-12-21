@@ -1,0 +1,22 @@
+---
+- name: Installing common soft
+  apt:
+    pkg={{ item }}
+    state=present
+  with_items:
+    - htop
+    - iftop
+    - tcpdump
+    - mc
+    - wget
+    - vlc
+    - tilda
+    - pydf
+    - git
+    - curl
+    - gufw
+    - mesa-utils
+    - python-pip
+#    - sshpass  #only for Ansible server instance
+
+
