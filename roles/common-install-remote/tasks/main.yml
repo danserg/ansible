@@ -1,0 +1,19 @@
+---
+
+- name: Installing -> common soft (CentOS)
+  yum:
+    pkg={{item}}
+    state=present
+  with_items:
+    - "http://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ansible_distribution_major_version}}.noarch.rpm"
+    - "{{item_name}}"
+  when: ansible_distribution == "CentOS"
+
+- name: Installing -> common soft (Ubuntu)
+  apt:
+    pkg={{ item }}
+    state=present
+  with_items:
+    - "{{item_name}}"
+  when: ansible_distribution == "Ubuntu"
+

@@ -1,0 +1,10 @@
+item_name:
+    - tcpdump
+    - mc
+    - wget
+    - git
+    - curl
+    - python-pip
+    - htop
+    - iftop
+    - pydf
