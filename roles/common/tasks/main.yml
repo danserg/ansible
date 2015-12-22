@@ -1,0 +1,21 @@
+---
+
+- name: Installing -> Common tools
+  sudo: yes
+  yum:
+    pkg={{ item }}
+    state=present
+  with_items:
+    - "epel-release.noarch"
+    - "{{ common_packages }}"
+  when: ansible_os_family == "RedHat"
+#
+- name: Installing -> Common tools
+  sudo: yes
+  apt:
+    pkg={{ item }}
+    state=present
+  with_items:
+    - "{{ common_packages }}"
+  when: ansible_os_family == "Debian"
+

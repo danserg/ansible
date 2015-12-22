@@ -1,0 +1,11 @@
+---
+
+common_packages:
+    - tcpdump
+    - mc
+    - wget
+    - git
+    - curl
+    - python-pip
+    - htop
+    - iftop
