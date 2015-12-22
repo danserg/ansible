@@ -1,7 +1,12 @@
 ---
-- name: Creates directory
+#
+- include: install.yml
+- include: uninstall.yml
+#
+- name: Create directories
+  sudo: yes
   file:
-    path=/home/{{item}}
+    path=/home/{{ item }}
     state=directory
     owner=aerus
     group=aerus
@@ -12,7 +17,7 @@
     - Develop
     - VirtualVM
     - Utils
-
+#
 #- name: write current user homedir .bashrc
 #  copy:
 #    src=.bashrc
@@ -20,21 +25,14 @@
 #    owner=aerus
 #    group=aerus
 #    mode=0644
-
-- name: debug
-  debug:
-    msg="{{ansible_eth1.ipv4.address}}"
-
+#
 - name: Change /etc/host
+  sudo: yes
   template:
     src=hosts.j2
     dest=/etc/hosts
     owner=root
     group=root
     mode=0644
-
-
-
-
-
+#
 

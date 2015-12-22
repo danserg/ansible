@@ -1,0 +1,21 @@
+---
+
+- name: Assert
+tags:
+	- assetr_platform
+assert:
+	that:
+		- ansible_os_family in ['RedHat']
+#
+- name: Install EPEL
+sudo: yes
+yum:
+	name=epel-release.noarch
+	state=present
+#
+- name: Install deps
+yum:
+	name="{{ item }}"
+	state=latest
+	with_item:
+		- {{dependent_packages}}

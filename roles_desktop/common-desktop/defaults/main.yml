@@ -1,10 +1,23 @@
 ---
-- name: Remove ->  Unused Soft
-  apt:
-    pkg={{ item }}
-    state=absent
-  with_items:
-    - deja-dup
+#
+common_packages_install:
+	- htop
+    - iftop
+    - tcpdump
+    - mc
+    - wget
+    - vlc
+    - tilda
+    - pydf
+    - git
+    - curl
+#    - gufw
+    - mesa-utils
+    - python-pip
+    - sshpass  #only for Ansible server instance
+#
+common_packages_uninstall:
+	- deja-dup
     - aisleriot
     - gnome-sudoku
     - gnome-mahjongg
@@ -18,5 +31,4 @@
     - evolution-data-server
     - unity-webapps-common
     - unity-lens-*
-
-
+#

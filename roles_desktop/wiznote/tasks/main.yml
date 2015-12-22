@@ -1,11 +1,13 @@
 ---
-
+#
 - name: Add -> Repo WizNote
+  sudo: yes
   apt_repository:
     repo='ppa:wiznote-team'
-
+#
 - name: Install -> WizNote
+  sudo: yes
   apt:
     name=wiznote
     state=present
-
+#

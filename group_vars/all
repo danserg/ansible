@@ -1,1 +1,18 @@
+#
 ansible_ssh_user: aau
+#
+#	Docker	#
+docker_compose_url: https://github.com/docker/compose/releases/download/1.2.0/docker-compose-Linux-x86_64
+#
+#	Jenkins Repo	#
+#	- Debian/Ubuntu		#
+jenkins_repo_url_debian: deb http://pkg.jenkins-ci.org/debian binary/
+jenkins_repo_key_url_debian: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
+#	- RedHat/CentOS		#
+jenkins_repo_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins.repo
+jenkins_repo_key_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+#
+# 	Java JDK Oracle		#
+#	- RedHat/CentOS		#
+java_download_url: http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm
+#

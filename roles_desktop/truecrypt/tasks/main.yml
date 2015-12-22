@@ -1,21 +1,22 @@
 ---
-
+#
 - name: Download -> TrueCrypt
   get_url:
-    url=http://sourceforge.net/projects/truecrypt/files/TrueCrypt/Other/TrueCrypt-7.2-Linux-x64.tar.gz
-    dest=/tmp/TrueCrypt-7.2-Linux-x64.tar.gz
+    url=http://sourceforge.net/projects/truecrypt/files/TrueCrypt/Other/{{ true_crypt_package }}
+    dest=/tmp/{{ true_crypt_package }}
     mode=0440
-
+#
 - name: Extract -> TrueCrypt
   unarchive:
-    src=/tmp/TrueCrypt-7.2-Linux-x64.tar.gz
+    src=/tmp/{{ true_crypt_package }}
     dest=/tmp
     copy=no
     mode=0770
-
+#
 - name: Install -> TrueCrypt
+  sudo: yes
   command:
     truecrypt-7.2-setup-x64
-
+#
 
 

@@ -1,6 +1,5 @@
 ---
 - hosts: group_1
-  sudo: yes
   roles:
 #    - dist-upgrade
 #    - common-install-remote

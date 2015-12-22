@@ -1,0 +1,10 @@
+---
+dependent_packages:
+	- openssl
+	- tar
+	- gzip
+	- MySQL-python
+#
+python_depends_package:
+	- mechanize
+#

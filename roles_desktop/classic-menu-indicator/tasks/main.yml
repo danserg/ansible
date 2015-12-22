@@ -1,11 +1,13 @@
 ---
-
+#
 - name: Add Repo -> Classic Menu Indicator
+  sudo: yes
   apt_repository:
     repo='ppa:diesch/testing'
-
+#
 - name: Install -> Classic Menu Indicator
+  sudo: yes
   apt:
     name=classicmenu-indicator
     state=present
-
+#

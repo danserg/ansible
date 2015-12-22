@@ -1,22 +1,26 @@
 ---
-
+#
 - name: Install -> VirtualBox
+  sudo: yes
   apt:
     name=virtualbox
     state=present
-
+#
 - name: Add -> Usergoup
+  sudo: yes
   user:
     name=aerus
     groups=vboxusers,disk
     append=yes
-
+#
 - name: Add -> Repo VirtualBox Indicator
+  sudo: yes
   apt_repository:
     repo='ppa:thebernmeister/ppa'
-
+#
 - name: Install -> VirtualBox Indicator
+  sudo: yes
   apt:
     name=indicator-virtual-box
     state=present
-
+#

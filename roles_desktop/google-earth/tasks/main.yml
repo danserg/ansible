@@ -1,6 +1,7 @@
 ---
-
+#
 - name: Install ->  Google Earth Dependensies
+  sudo: yes
   apt:
     pkg={{ item }}
     state=present
@@ -14,16 +15,15 @@
     - libglu1-mesa:i386
     - libglib2.0-0:i386
     - libsm6:i386
-
+#
 - name: Download -> Google Earth
   get_url:
-    url=http://dl.google.com/dl/earth/client/current/google-earth-stable_current_i386.deb
-    dest=/tmp/google-earth-stable_current_i386.deb
+    url=http://dl.google.com/dl/earth/client/current/{{ google_earth_package }}
+    dest=/tmp/{{ google_earth_package }}
     mode=0440
-
+#
 - name: Install -> Google Earth
+  sudo: yes
   apt:
-    deb=/tmp/google-earth-stable_current_i386.deb
-
-
-
+    deb=/tmp/{{ google_earth_package }}
+#

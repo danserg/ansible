@@ -1,0 +1,11 @@
+---
+#
+- name: Remove ->  Unused Soft
+  sudo: yes
+  apt:
+    pkg={{ item }}
+    state=absent
+  with_items:
+    - "{{ common_packages_uninstall }}"
+#
+

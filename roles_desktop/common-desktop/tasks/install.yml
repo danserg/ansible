@@ -1,0 +1,10 @@
+---
+#
+- name: Installing -> Common tools
+  sudo: yes
+  apt:
+    pkg={{ item }}
+    state=present
+  with_items:
+    - "{{ common_packages_install }}"
+#

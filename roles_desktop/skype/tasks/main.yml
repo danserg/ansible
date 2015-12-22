@@ -1,14 +1,14 @@
 ---
-
+#
 - name: Add -> Repo Skype
+  sudo: yes
   apt_repository:
-    repo="deb http://archive.canonical.com/ubuntu vivid partner"
+    repo="deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner"
     state=present
-
+#
 - name: Install -> Skype
+  sudo: yes
   apt:
     name=skype
     state=present
-
-
-
+#

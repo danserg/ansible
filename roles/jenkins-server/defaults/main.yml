@@ -1,7 +1,5 @@
 #
-- include_vars: jenkins-repo.yml
 - include_vars: jenkins-plugins.yml
-
 #----------------------
 jenkins_name: jenkins
 jenkins_user: jenkins

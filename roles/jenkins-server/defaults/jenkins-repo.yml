@@ -1,7 +1,0 @@
-#Debian/Ubuntu
-jenkins_repo_url_debian: deb http://pkg.jenkins-ci.org/debian binary/
-jenkins_repo_key_url_debian: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
-
-#RedHat/CentOS
-jenkins_repo_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins.repo
-jenkins_repo_key_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key

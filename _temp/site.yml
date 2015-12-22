@@ -1,0 +1,23 @@
+---
+
+- hosts:
+		- database
+		- wordpress
+user: {{}}
+roles:
+	- deps_install
+
+- hosts:
+		- database
+user: {{}}
+roles:
+	- mysql_install
+	- mysql_configuration
+
+- hosts:
+		- wordpress
+user: {{}}
+roles:
+	- wordpress_install
+	- wordpress_configuration
+

@@ -1,6 +1,5 @@
 ---
 - hosts: CentOS
-  sudo: yes
   roles:
 #    - dist-upgrade
 #    - common-install
@@ -18,8 +17,5 @@
 #    - common-remove
 #    - common-changes
 #    - docker-rancher
-    - bootstrap-remote
-
-
-
-  tags: preconf
+    - bootstrap
+	- bootstrap-desktop
