@@ -1,0 +1,8 @@
+---
+#
+- name: Disable -> SELinux
+  sudo: yes
+  selinux:
+    state=disabled
+  ignore_errors: true
+#

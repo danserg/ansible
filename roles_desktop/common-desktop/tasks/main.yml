@@ -1,30 +1,12 @@
 ---
 #
-- include: install.yml
-- include: uninstall.yml
+- include: install_packages.yml
 #
-- name: Create directories
-  sudo: yes
-  file:
-    path=/home/{{ item }}
-    state=directory
-    owner=aerus
-    group=aerus
-    mode=0774
-  with_items:
-    - Cloud_Sync
-    - Downloads
-    - Develop
-    - VirtualVM
-    - Utils
+- include: uninstall_packages.yml
 #
-#- name: write current user homedir .bashrc
-#  copy:
-#    src=.bashrc
-#    dest=/home/aerus/.bashrc
-#    owner=aerus
-#    group=aerus
-#    mode=0644
+- include: create_workspace.yml
+#
+- include: disable_ipv6.yml
 #
 - name: Change /etc/host
   sudo: yes

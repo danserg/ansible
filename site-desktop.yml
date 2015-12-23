@@ -1,0 +1,16 @@
+---
+- hosts: desktop
+  roles:
+    - dist-upgrade
+    - common-desktop
+    - deadbeef
+    - virtualbox-server
+    - oracle-java
+    - wiznote
+    - classic-menu-indicator
+    - docker-server
+    - dropbox
+    - google-chrome
+    - google-earth
+    - skype
+
