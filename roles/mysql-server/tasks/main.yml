@@ -10,32 +10,31 @@
   notify:
     - start mysqld
 #
-
-- name: "INFO | Start MySQL server"
-  command: sudo service mysqld start
-#
-- name: "INFO | Enable mysqld service via chkconfig"
-  tags:
-    - mysqld_install
-  command: sudo chkconfig mysqld on
-#
-- include: set_mysql_root_password.yml
-#
-- name: "INFO | Stop MySQL server"
-  tags:
-    - mysqld_install
-  command: sudo service mysqld stop
+- name: mysql | Update root password for all root accounts
+  mysql_user:
+  	name={{ mysql_server_root_login }}
+	host={{ item }}
+	check_implicit_admin=yes
+	password={{ mysql_server_root_password }}
+	login_user={{ mysql_server_root_login }}
+	login_password={{ mysql_server_root_password }}
+  with_items:
+    - "{{ hostname }}"
+    - 127.0.0.1
+    - localhost
+  notify:
+    - stop mysqld
 #
 - name: "INFO | Configure MySQL /etc/my.cnf"
-  tags:
-    - mysqld_install
-  template: src=my.cnf.j2 dest=/etc/my.cnf mode=0644 owner=root group=root
   sudo: yes
-#
-- name: "INFO | Start MySQL server"
-  tags:
-    - mysqld_install
-  command: sudo service mysqld start
+  template:
+  	src=my.cnf.j2
+	dest=/etc/my.cnf
+	mode=0644
+	owner=root
+	group=root
+  notify:
+    - start mysqld
 #
 - include: ping_mysqld_server.yml
 #
