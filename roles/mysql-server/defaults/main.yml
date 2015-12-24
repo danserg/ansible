@@ -1,0 +1,13 @@
+---
+#
+mysql_packages:
+	- python-devel
+	- MySQL-python
+	- mysql-server
+	- mysql
+#
+mysql_server_root_login: "root"
+mysql_server_root_password: "rootpasswd"
+mysql_bind_address: "127.0.0.1"
+mysql_bind_port: 3306
+#

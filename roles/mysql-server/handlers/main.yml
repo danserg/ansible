@@ -1,0 +1,16 @@
+- name: start mysqld
+  service:
+    name=mysqld
+    state=started
+    enabled=yes
+#
+- name: restart mysqld
+  service:
+    name=mysqld
+    state=restarted
+#
+- name: stop mysqld
+  service:
+    name=mysqld
+    state=stopped
+#

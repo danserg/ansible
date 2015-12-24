@@ -1,0 +1,42 @@
+---
+#
+- name: "Install | packages required for MySQL"
+  sudo: yes
+  yum:
+    pkg={{ item }}
+    state=present
+  with_items:
+	- "{{ mysql_packages }}"
+  notify:
+    - start mysqld
+#
+
+- name: "INFO | Start MySQL server"
+  command: sudo service mysqld start
+#
+- name: "INFO | Enable mysqld service via chkconfig"
+  tags:
+    - mysqld_install
+  command: sudo chkconfig mysqld on
+#
+- include: set_mysql_root_password.yml
+#
+- name: "INFO | Stop MySQL server"
+  tags:
+    - mysqld_install
+  command: sudo service mysqld stop
+#
+- name: "INFO | Configure MySQL /etc/my.cnf"
+  tags:
+    - mysqld_install
+  template: src=my.cnf.j2 dest=/etc/my.cnf mode=0644 owner=root group=root
+  sudo: yes
+#
+- name: "INFO | Start MySQL server"
+  tags:
+    - mysqld_install
+  command: sudo service mysqld start
+#
+- include: ping_mysqld_server.yml
+#
+
