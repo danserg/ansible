@@ -1,15 +1,20 @@
+---
+#
 - name: start mysqld
+  sudo: yes
   service:
     name=mysqld
     state=started
     enabled=yes
 #
 - name: restart mysqld
+  sudo: yes
   service:
     name=mysqld
     state=restarted
 #
 - name: stop mysqld
+  sudo: yes
   service:
     name=mysqld
     state=stopped

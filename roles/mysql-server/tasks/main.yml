@@ -6,7 +6,7 @@
     pkg={{ item }}
     state=present
   with_items:
-	   - "{{ mysql_packages }}"
+    - "{{ mysql_packages }}"
   notify:
     - start mysqld
 #
@@ -28,11 +28,11 @@
 - name: "INFO | Configure MySQL /etc/my.cnf"
   sudo: yes
   template:
-  	src=my.cnf.j2
-	dest=/etc/my.cnf
-	mode=0644
-	owner=root
-	group=root
+    src=my.cnf.j2
+    dest=/etc/my.cnf
+    mode=0644
+    owner=root
+    group=root
   notify:
     - start mysqld
 #
