@@ -1,0 +1,12 @@
+---
+#
+- name: Configure Apache.
+  sudo: yes
+  lineinfile:
+    dest: "{{ apache_server_root }}/conf/httpd.conf"
+    regexp: "^Listen "
+    line: "Listen {{ apache_listen_port }}"
+    state: present
+  notify:
+    - restart httpd
+#
