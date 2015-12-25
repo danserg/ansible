@@ -1,7 +1,5 @@
 ---
 - name: "INFO | Ping MySQL server"
-  tags:
-    - mysqld_install
   shell: chdir=/tmp
          mysqladmin --host {{mysql_bind_address}}
                     --port {{mysql_bind_port}}
@@ -12,8 +10,6 @@
   register: if_mysqld_ping
 #
 - name: "INFO | Alert if MySQL server is not pinged"
-  tags:
-    - mysqld_install
   fail: msg="ERROR | Something wrong! I can't connect to the MySQL server!"
   when: not "if_mysqld_ping|success"
 #

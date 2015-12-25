@@ -10,6 +10,15 @@
   notify:
     - start mysqld
 #
+- name: Ensure anonymous users are not in the database
+  mysql_user:
+    name=''
+    host={{ item }}
+    state=absent
+  with_items:
+    - localhost
+    - "{{ ansible_fqdn }}"
+#
 - name: mysql | Update root password for all root accounts
   mysql_user:
     name={{ mysql_server_root_login }}
