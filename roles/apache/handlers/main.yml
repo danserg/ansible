@@ -1,0 +1,8 @@
+---
+#
+- name: restart httpd
+  sudo: yes
+  service:
+    name: httpd
+    state: restarted
+#
