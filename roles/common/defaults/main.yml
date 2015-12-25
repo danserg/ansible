@@ -1,15 +1,16 @@
 ---
 #
 common_packages:
-    - tcpdump
-    - mc
-    - wget
-    - git
-    - curl
-    - python-pip
-    - htop
-    - iftop
-    - dos2unix
-	- libselinux-python
+  - tcpdump
+  - mc
+  - wget
+  - git
+  - curl
+  - python-pip
+  - htop
+  - iftop
+  - dos2unix
+  - libselinux-python
+  - bash-completion
 
 #

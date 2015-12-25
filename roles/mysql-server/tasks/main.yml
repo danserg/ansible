@@ -6,7 +6,7 @@
     pkg={{ item }}
     state=present
   with_items:
-	- "{{ mysql_packages }}"
+	   - "{{ mysql_packages }}"
   notify:
     - start mysqld
 #
@@ -19,7 +19,7 @@
 	login_user={{ mysql_server_root_login }}
 	login_password={{ mysql_server_root_password }}
   with_items:
-    - "{{ hostname }}"
+    - "{{ ansible_fqdn }}"
     - 127.0.0.1
     - localhost
   notify:
