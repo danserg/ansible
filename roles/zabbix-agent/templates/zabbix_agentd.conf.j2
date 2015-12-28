@@ -1,0 +1,38 @@
+
+# This is a config file for the Zabbix agent daemon (Unix)
+# To get more information about Zabbix, visit http://www.zabbix.com
+
+# https://www.zabbix.com/documentation/ru/2.0/manual/appendix/config/zabbix_agentd
+
+############ GENERAL PARAMETERS #################
+
+PidFile=/var/run/zabbix/zabbix_agentd.pid
+LogFile=/var/log/zabbix/zabbix_agentd.log
+LogFileSize=128
+
+EnableRemoteCommands=1
+LogRemoteCommands=1
+
+##### Passive checks related
+
+Server={{ zabbix_server }}
+ListenPort={{ zabbix_agent_port }}
+StartAgents=4
+
+##### Active checks related
+
+ServerActive={{ zabbix_server }}:{{ zabbix_server_port }}
+Hostname={{ ansible_nodename }}
+RefreshActiveChecks=120
+
+############ ADVANCED PARAMETERS #################
+
+Timeout=3
+AllowRoot=0
+Include=/etc/zabbix/zabbix_agentd.d/
+
+####### USER-DEFINED MONITORED PARAMETERS #######
+
+UnsafeUserParameters=0
+
+####### LOADABLE MODULES #######

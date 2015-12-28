@@ -1,0 +1,11 @@
+---
+#
+zabbix_agent_service_name: zabbix-agent
+zabbix_server: []
+zabbix_server_port: 10051
+zabbix_agent_port: 10050
+#
+zabbix_api_user: zb-agent-add
+zabbix_api_password: zb-agent-add
+zabbix_server_api_url: http://{{ zabbix_server }}/zabbix/api_jsonrpc.php
+
