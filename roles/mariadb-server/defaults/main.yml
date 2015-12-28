@@ -1,0 +1,13 @@
+---
+#
+mariadb_packages:
+	- python-devel
+	- MySQL-python
+	- mariadb
+	- mariadb-server
+#
+mariadb_server_root_login: "root"
+mariadb_server_root_password: "rootpasswd"
+mariadb_bind_address: "127.0.0.1"
+mariadb_bind_port: 3306
+#

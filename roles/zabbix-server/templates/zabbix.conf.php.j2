@@ -1,0 +1,20 @@
+<?php
+// Zabbix GUI configuration file
+global $DB;
+
+$DB['TYPE']     = '{{ database_type_long|upper() }}';
+$DB['SERVER']   = '{{ zabbix_server_DBHost }}';
+$DB['PORT']     = '{{ zabbix_server_DBPort | default(0) }}';
+$DB['DATABASE'] = '{{ zabbix_server_DBName }}';
+$DB['USER']     = '{{ zabbix_server_DBUser }}';
+$DB['PASSWORD'] = '{{ zabbix_server_DBPassword }}';
+
+// SCHEMA is relevant only for IBM_DB2 database
+$DB['SCHEMA'] = '';
+
+$ZBX_SERVER      = '{{ inventory_hostname }}';
+$ZBX_SERVER_PORT = '{{ zabbix_server_ListenPort }}';
+$ZBX_SERVER_NAME = '{{ inventory_hostname_short }}';
+
+$IMAGE_FORMAT_DEFAULT = IMAGE_FORMAT_PNG;
+?>

@@ -1,0 +1,16 @@
+---
+- name: "INFO | Ping mariadb server"
+  shell: chdir=/tmp
+         mysqladmin --host {{mariadb_bind_address}}
+                    --port {{mariadb_bind_port}}
+                    --protocol=TCP
+                    --user={{mariadb_server_root_login}}
+                    --password={{mariadb_server_root_password}}
+                    ping
+  register: if_mariadb_ping
+#
+- name: "INFO | Alert if mariadb server is not pinged"
+  fail: msg="ERROR | Something wrong! I can't connect to the mariadb server!"
+  when: not "if_mariadb_ping|success"
+#
+

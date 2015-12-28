@@ -1,21 +1,21 @@
 ---
 #
-- name: start mysqld
+- name: start mariadb
   sudo: yes
   service:
-    name=mysqld
+    name=mariadb
     state=started
     enabled=yes
 #
-- name: restart mysqld
+- name: restart mariadb
   sudo: yes
   service:
-    name=mysqld
+    name=mariadb
     state=restarted
 #
-- name: stop mysqld
+- name: stop mariadb
   sudo: yes
   service:
-    name=mysqld
+    name=mariadb
     state=stopped
 #

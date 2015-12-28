@@ -1,14 +1,14 @@
 ---
 #
-- name: "Install | packages required for MySQL"
+- name: "Install | packages required for mariadb"
   sudo: yes
   yum:
     pkg={{ item }}
     state=present
   with_items:
-    - "{{ mysql_packages }}"
+    - "{{ mariadb_packages }}"
   notify:
-    - start mysqld
+    - start mariadb
 #
 - name: Ensure anonymous users are not in the database
   mysql_user:
@@ -19,22 +19,22 @@
     - localhost
     - "{{ ansible_fqdn }}"
 #
-- name: mysql | Update root password for all root accounts
+- name: mariadb | Update root password for all root accounts
   mysql_user:
-    name={{ mysql_server_root_login }}
+    name={{ mariadb_server_root_login }}
     host={{ item }}
     check_implicit_admin=yes
-    password={{ mysql_server_root_password }}
-    login_user={{ mysql_server_root_login }}
-    login_password={{ mysql_server_root_password }}
+    password={{ mariadb_server_root_password }}
+    login_user={{ mariadb_server_root_login }}
+    login_password={{ mariadb_server_root_password }}
   with_items:
     - "{{ ansible_fqdn }}"
     - 127.0.0.1
     - localhost
   notify:
-    - stop mysqld
+    - stop mariadb
 #
-- name: "INFO | Configure MySQL /etc/my.cnf"
+- name: "INFO | Configure mariadb /etc/my.cnf"
   sudo: yes
   template:
     src=my.cnf.j2
@@ -43,8 +43,8 @@
     owner=root
     group=root
   notify:
-    - start mysqld
+    - start mariadb
 #
-- include: ping_mysqld_server.yml
+- include: ping_mariadb_server.yml
 #
 

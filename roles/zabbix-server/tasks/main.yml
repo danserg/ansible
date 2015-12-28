@@ -1,10 +1,46 @@
 ---
 #
-- name: Zabbix | Add repository
+- name: Zabbix | Add Zabbix repository
+  sudo: yes
   yum:
-    name={{ zabbix_repo }}
+    name={{ zabbix_repo_rhel7 }}
     state=present
 #
-
+- name: Zabbix | Install Zabbix server
+  sudo: yes
+  yum:
+    name={{ item }}
+    state=present
+  with_items:
+   - "{{ zabbix_packages }}"
+#
+- name: configure zabbix-server.conf
+  sudo: yes
+  template:
+    dest=/etc/zabbix/zabbix_server.conf
+    src=zabbix_server.conf.j2
+    owner=root
+    group=zabbix
+    mode=0640
+#
+- include: configure-mysql.yml
+#
+- name: Configure zabbix-web
+  sudo: yes
+  template:
+    src=zabbix.conf.php.j2
+    dest=/etc/zabbix/web/zabbix.conf.php
+    owner=zabbix
+    group=zabbix
+    mode=0755
+  notify:
+   restart zabbix-server
+#
+- name: ensure started zabbix-server
+  sudo: yes
+  service:
+   name=zabbix-server
+   state=started
+   enabled=yes
 
 
