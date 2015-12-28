@@ -1,2 +1,23 @@
 ---
-
+#
+- name: Zabbix | Add Zabbix repository
+  sudo: yes
+  yum:
+    name={{ zabbix_repo_rhel7 }}
+    state=present
+#
+- name: Zabbix | Install Zabbix agent
+  sudo: yes
+  yum:
+    name=zabbix-agent
+    state=present
+#
+- name: configure zabbix-server.conf
+  sudo: yes
+  template:
+    dest=/etc/zabbix/zabbix_server.conf
+    src=zabbix_server.conf.j2
+    owner=root
+    group=zabbix
+    mode=0640
+#
