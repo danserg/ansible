@@ -1,6 +1,10 @@
 ---
 #
-
+- name: Zabbix | Add repository
+  yum:
+    name={{ zabbix_repo }}
+    state=present
+#
 
 
 
