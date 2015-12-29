@@ -12,12 +12,19 @@
     name=zabbix-agent
     state=present
 #
-- name: configure zabbix-server.conf
+- name: configure /etc/zabbix/zabbix_agentd.conf
   sudo: yes
   template:
-    dest=/etc/zabbix/zabbix_server.conf
-    src=zabbix_server.conf.j2
+    dest=/etc/zabbix/zabbix_agentd.conf
+    src=zabbix_agentd.conf.j2
     owner=root
     group=zabbix
     mode=0640
+#
+- name: ensure started zabbix-agent
+  sudo: yes
+  service:
+   name=zabbix-agent
+   state=started
+   enabled=yes
 #

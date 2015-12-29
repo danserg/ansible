@@ -14,7 +14,7 @@
   with_items:
    - "{{ zabbix_packages }}"
 #
-- name: configure zabbix-server.conf
+- name: configure /etc/zabbix/zabbix-server.conf
   sudo: yes
   template:
     dest=/etc/zabbix/zabbix_server.conf
@@ -25,7 +25,15 @@
 #
 - include: configure-mysql.yml
 #
-- name: Configure zabbix-web
+- name: Configure /etc/httpd/conf.d/zabbix.conf
+  sudo: yes
+  lineinfile:
+    dest: "/etc/httpd/conf.d/zabbix.conf"
+    regexp: "^# php_value date.timezone "
+    line: "php_value date.timezone Europe/Kiev"
+    state: present
+#
+- name: Configure /etc/zabbix/web/zabbix.conf.php
   sudo: yes
   template:
     src=zabbix.conf.php.j2
@@ -42,5 +50,4 @@
    name=zabbix-server
    state=started
    enabled=yes
-
-
+#
