@@ -1,8 +1,0 @@
-# vim:filetype=sh
-# {{ ansible_managed }}
-#DOCKER_OPTS=""
-DOCKER_OPTS="$DOCKER_OPTS '--graph={{ docker_graph_storage_dir }}'"
-{% for addr in docker_listen_addresses %}
-DOCKER_OPTS="$DOCKER_OPTS -H {{ addr }}"
-{% endfor %}
-export DOCKER_OPTS

@@ -1,0 +1,32 @@
+---
+#
+- name: Add CentOS docker repo
+  sudo: yes
+  yumrepo:
+    name: docker
+    description: Docker Repository
+    baseurl: https://yum.dockerproject.org/repo/main/{{ ansible_distribution | lower() }}/{{ ansible_distribution_major_version }}
+    gpgcheck: yes
+    gpgkey: https://yum.dockerproject.org/gpg
+    enabled: yes
+#
+- name: Install -> Docker on CentOS
+  sudo: yes
+  yum:
+    name=docker-engine
+    state=latest
+    update_cache=yes
+#
+- name: Configure docker unit
+  sudo: yes
+  template:
+    src=docker.service.j2
+    dest=/lib/systemd/system/docker.service
+    mode=0644
+  register: unit
+#
+- name: Reload systemd
+  sudo: yes
+  command: systemctl daemon-reload
+  when: unit|changed
+#

@@ -1,22 +1,30 @@
 ---
-
+#
 - name: Create -> Graph Storage Dir
+  sudo: yes
   file:
     path={{ docker_graph_storage_dir }}
     state=directory
     mode=0700
 
-- include: centos.yml
+- include: centos_docker_install.yml
   when: ansible_distribution == "CentOS"
 
-- include: ubuntu.yml
-  when: ansible_distribution == "Ubuntu"
+#- include: ubuntu_docker_install.yml
+#  when: ansible_distribution == "Ubuntu"
+#
+- name: ensure started docker-server
+  sudo: yes
+  service:
+   name=docker
+   state=started
+   enabled=yes
+#
+#- name: Install -> docker-py
+#  pip: name=docker-py
 
-- name: Install -> docker-py
-  pip: name=docker-py
-
-- name: Install -> Docker-Compose
-  get_url:
-    url={{docker_compose_url}}
-    dest=/usr/local/bin/docker-compose
-    mode=0770
+#- name: Install -> Docker-Compose
+#  get_url:
+#    url={{docker_compose_url}}
+#    dest=/usr/local/bin/docker-compose
+#    mode=0770

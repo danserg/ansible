@@ -1,5 +1,9 @@
+---
+#
 - name: restart docker
+  sudo: yes
   service:
     name=docker
     state=restarted
     enabled=yes
+#
