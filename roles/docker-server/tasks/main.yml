@@ -6,7 +6,12 @@
     path={{ docker_graph_storage_dir }}
     state=directory
     mode=0700
-
+#
+- name: Disable SELinux
+  sudo: yes
+  selinux:
+    state: disabled
+#
 - include: centos_docker_install.yml
   when: ansible_distribution == "CentOS"
 

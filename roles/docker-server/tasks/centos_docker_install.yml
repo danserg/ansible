@@ -13,9 +13,12 @@
 - name: Install -> Docker on CentOS
   sudo: yes
   yum:
-    name=docker-engine
+    name={{ item }}
     state=latest
     update_cache=yes
+  with_items:
+    - docker-engine
+    - docker-python
 #
 - name: Configure docker unit
   sudo: yes

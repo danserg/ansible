@@ -1,16 +1,18 @@
+---
+#
 - name: Add -> Docker Repository Key
   apt_key: url="https://get.docker.io/gpg" id="A88D21E9"
-
+#
 - name: Add -> Docker Repository
   apt_repository:
     repo: 'deb https://get.docker.io/ubuntu docker main'
     update_cache: yes
-
+#
 - name: Install -> Docker
   apt:
     name=lxc-docker
     state=present
-
+#
 - name: Change -> SystemD docker.service config
   lineinfile:
     dest=/lib/systemd/system/docker.service
@@ -19,7 +21,7 @@
   notify:
     - restart docker
   when: ansible_distribution_major_version == "15"
-
+#
 - name: Change -> InitD /etc/default/docker config
   template:
     src=etc-default-docker.j2
@@ -28,3 +30,4 @@
   notify:
     - restart docker
   when: ansible_distribution_major_version == "14"
+#
