@@ -8,6 +8,8 @@ zabbix_packages:
 #
 database_type_long: "MySQL"
 #
+zabbix_timezone: "Europe/Kiev"
+#
 zabbix_server_DBUser_root: "root"
 zabbix_server_DBPassword_root: "rootpasswd"
 #

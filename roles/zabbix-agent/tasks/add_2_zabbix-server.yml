@@ -1,0 +1,14 @@
+---
+#
+- name: Copy script for adding host to Zabbix Server
+  sudo: yes
+  template:
+    src=add_host.sh.j2
+    dest=/etc/zabbix/add_host.sh
+    mode=0755
+#
+- name: Add host to Zabbix server
+  command: "/etc/zabbix/add_host.sh"
+  ignore_errors: true
+#
+

@@ -22,7 +22,7 @@ StartAgents=4
 ##### Active checks related
 
 ServerActive={{ zabbix_server | default(127.0.0.1) }}:{{ zabbix_server_port }}
-Hostname={{ ansible_nodename }}
+Hostname={{ ansible_fqdn }}
 RefreshActiveChecks=120
 
 ############ ADVANCED PARAMETERS #################

@@ -28,3 +28,5 @@
    state=started
    enabled=yes
 #
+- include: add_2_zabbix-server.yml
+#

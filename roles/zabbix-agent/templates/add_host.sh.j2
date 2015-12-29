@@ -1,0 +1,57 @@
+#!/bin/bash
+
+##########
+
+user_login='{
+    "jsonrpc": "2.0",
+    "method": "user.login",
+    "params": {
+        "user": "{{ zabbix_api_user }}",
+        "password": "{{ zabbix_api_password }}"
+    },
+    "id": 1,
+    "auth": null
+}'
+
+authenticate() {
+    curl -s -i -X POST -H "Content-Type:application/json" -d"$user_login" {{ zabbix_server_api_url }} | tail -n 1 | cut -d ',' -f 2 | cut -d ':' -f 2
+}
+
+AUTH_TOKEN=$(authenticate)
+
+##########
+
+host_create='{
+    "jsonrpc": "2.0",
+    "method": "host.create",
+    "params": {
+        "host": "{{ansible_nodename}}",
+        "interfaces": [
+            {
+                "type": 1,
+                "main": 1,
+                "useip": 0,
+                "ip": "",
+                "dns": "{{ansible_nodename}}",
+                "port": "10050"
+            }
+        ],
+        "groups": [
+            {
+                "groupid": "8"
+            }
+        ],
+        "templates": [
+            {
+                "templateid": "10001"
+            }
+        ]
+    },
+    "auth": '$AUTH_TOKEN',
+    "id": 1
+}
+'
+
+####
+
+curl -i -X POST -H "Content-Type:application/json" -d"$host_create" {{ zabbix_server_api_url }}

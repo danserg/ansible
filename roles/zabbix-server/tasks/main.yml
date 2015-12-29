@@ -1,12 +1,12 @@
 ---
 #
-- name: Zabbix | Add Zabbix repository
+- name: Add Zabbix repository
   sudo: yes
   yum:
     name={{ zabbix_repo_rhel7 }}
     state=present
 #
-- name: Zabbix | Install Zabbix server
+- name: Install Zabbix server
   sudo: yes
   yum:
     name={{ item }}
@@ -30,7 +30,7 @@
   lineinfile:
     dest: "/etc/httpd/conf.d/zabbix.conf"
     regexp: "^# php_value date.timezone "
-    line: "php_value date.timezone Europe/Kiev"
+    line: "php_value date.timezone {{ zabbix_timezone }}"
     state: present
 #
 - name: Configure /etc/zabbix/web/zabbix.conf.php
