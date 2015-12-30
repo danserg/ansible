@@ -1,22 +1,17 @@
 ---
 #
-- name: Create -> Graph Storage Dir
-  sudo: yes
-  file:
-    path={{ docker_graph_storage_dir }}
-    state=directory
-    mode=0700
-#
-- name: Disable SELinux
-  sudo: yes
-  selinux:
-    state: disabled
+#- name: Create -> Graph Storage Dir
+#  sudo: yes
+#  file:
+#    path={{ docker_graph_storage_dir }}
+#    state=directory
+#    mode=0700
 #
 - include: centos_docker_install.yml
   when: ansible_distribution == "CentOS"
-
-#- include: ubuntu_docker_install.yml
-#  when: ansible_distribution == "Ubuntu"
+#
+- include: ubuntu_docker_install.yml
+  when: ansible_distribution == "Ubuntu"
 #
 - name: ensure started docker-server
   sudo: yes
@@ -25,11 +20,15 @@
    state=started
    enabled=yes
 #
-#- name: Install -> docker-py
-#  pip: name=docker-py
+- name: Install -> docker-py
+  sudo: yes
+  pip: name=docker-py
+#
+- name: Install -> Docker-Compose
+  sudo: yes
+  get_url:
+    url=https://github.com/docker/compose/releases/download/{{ compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}
+    dest=/usr/local/bin/docker-compose
+    mode=0755
+#
 
-#- name: Install -> Docker-Compose
-#  get_url:
-#    url={{docker_compose_url}}
-#    dest=/usr/local/bin/docker-compose
-#    mode=0770

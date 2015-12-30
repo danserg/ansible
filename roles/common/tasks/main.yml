@@ -5,4 +5,5 @@
 - include: disable_ipv6.yml
 #
 - include: disable_selinux.yml
+  when: ansible_os_family == 'RedHat'
 #

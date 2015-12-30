@@ -1,33 +1,51 @@
 ---
 #
+- name: Install Docker dependency
+  sudo: yes
+  apt:
+    name={{ item }}
+    state=present
+  with_items:
+    - "linux-image-extra-virtual"
+    - "linux-image-extra-{{ ansible_kernel }}"
+    - "apt-transport-https"
+    - "ca-certificates"
+#
 - name: Add -> Docker Repository Key
-  apt_key: url="https://get.docker.io/gpg" id="A88D21E9"
+  #apt_key: url="https://get.docker.io/gpg" id="A88D21E9"
+  sudo: yes
+  apt_key:
+    keyserver="hkp://p80.pool.sks-keyservers.net:80"
+    id="58118E89F3A912897C070ADBF76221572C52609D"
 #
 - name: Add -> Docker Repository
+  sudo: yes
   apt_repository:
-    repo: 'deb https://get.docker.io/ubuntu docker main'
-    update_cache: yes
+    #repo: 'deb https://get.docker.io/ubuntu docker main'
+    repo='deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main'
+    update_cache=yes
 #
 - name: Install -> Docker
+  sudo: yes
   apt:
-    name=lxc-docker
-    state=present
+    name=docker-engine
+    state=latest
 #
-- name: Change -> SystemD docker.service config
-  lineinfile:
-    dest=/lib/systemd/system/docker.service
-    regexp=^ExecStart=
-    line="ExecStart=/usr/bin/docker -d --graph={{docker_graph_storage_dir}} -H fd://"
-  notify:
-    - restart docker
-  when: ansible_distribution_major_version == "15"
+#- name: Change -> SystemD docker.service config
+#  lineinfile:
+#    dest=/lib/systemd/system/docker.service
+#    regexp=^ExecStart=
+#    line="ExecStart=/usr/bin/docker -d --graph={{docker_graph_storage_dir}} -H fd://"
+#  notify:
+#    - restart docker
+#  when: ansible_distribution_major_version == "15"
 #
-- name: Change -> InitD /etc/default/docker config
-  template:
-    src=etc-default-docker.j2
-    dest=/etc/default/docker
-    mode=0644
-  notify:
-    - restart docker
-  when: ansible_distribution_major_version == "14"
+#- name: Change -> InitD /etc/default/docker config
+#  template:
+#    src=etc-default-docker.j2
+#    dest=/etc/default/docker
+#    mode=0644
+#  notify:
+#    - restart docker
+#  when: ansible_distribution_major_version == "14"
 #

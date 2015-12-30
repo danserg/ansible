@@ -1,5 +1,10 @@
 ---
 #
+- name: Disable SELinux
+  sudo: yes
+  selinux:
+    state: disabled
+#
 - name: Add CentOS docker repo
   sudo: yes
   yumrepo:

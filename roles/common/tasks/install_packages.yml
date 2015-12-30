@@ -8,6 +8,7 @@
   with_items:
     - "epel-release.noarch"
     - "{{ common_packages }}"
+    - "libselinux-python"
   when: ansible_os_family == "RedHat"
 #
 - name: Installing -> Common tools

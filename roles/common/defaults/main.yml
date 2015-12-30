@@ -10,7 +10,6 @@ common_packages:
   - htop
   - iftop
   - dos2unix
-  - libselinux-python
   - bash-completion
 
 #

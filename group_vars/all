@@ -2,7 +2,7 @@
 ansible_ssh_user: aau
 #
 #	Docker	#
-docker_compose_url: https://github.com/docker/compose/releases/download/1.2.0/docker-compose-Linux-x86_64
+compose_version: "1.5.2"
 #
 #	Jenkins Repo	#
 #	- Debian/Ubuntu		#
