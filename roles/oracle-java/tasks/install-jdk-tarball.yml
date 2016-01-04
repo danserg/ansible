@@ -1,0 +1,21 @@
+---
+#
+- name: mkdir for Java
+  sudo: yes
+  file:
+    path: "/usr/java/jdk{{ jdk_version }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "u=rwx,go=rx"
+#
+- name: install JDK via tarball file
+  sudo: yes
+  unarchive:
+    src: "{{ java_download_path }}/{{ jdk_tarball_file }}.tar.gz"
+    dest: "/usr/java"
+    owner: root
+    group: root
+    mode: "go-w"
+    copy: no
+#

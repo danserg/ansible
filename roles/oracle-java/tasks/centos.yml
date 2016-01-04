@@ -1,18 +1,43 @@
 ---
 #
-- debug: msg="(CentOS/Redhat)"
-#
 - name: Remove -> OpenJDK
   sudo: yes
   yum:
     pkg=java-1.*.0-openjdk
     state=absent
 #
-- name: download -> JavaXXX.rpm
-  command: "wget -O /tmp/oracle_java_jdk.rpm --no-check-certificate --header 'Cookie: oraclelicense=accept-securebackup-cookie' {{java_download_url}}"
+- name: precondition - java_version
+  fail: msg="ERROR - required variable 'java_version' missing."
+  when: java_version is not defined
 #
-- name: Installing -> Oracle Java 8 (CentOS/Redhat)
+- name: precondition - java_subversion
+  fail: msg="ERROR - required variable 'java_subversion' missing."
+  when: java_subversion is not defined
+#
+- include: set-role-variables.yml
+#
+- name: get JDK tarball (as RPM file)
+  command: curl -L  -H 'Cookie:oraclelicense=accept-securebackup-cookie'  -o {{ jdk_tarball_file }}.rpm  {{ jdk_tarball_url }}.rpm
+  args:
+    creates: "{{ java_download_path }}/{{ jdk_tarball_file }}.rpm"
+    chdir:   "{{ java_download_path }}"
+  when: jdk_tarball_pkg == "rpm"
+#
+- name: install JDK via RPM file
+  sudo: yes
   yum:
-    pkg="/tmp/oracle_java_jdk.rpm"
-    state=present
+    name: "{{ java_download_path }}/{{ jdk_tarball_file }}.rpm"
+    state: present
+  when: jdk_tarball_pkg == "rpm"
+#
+- name: get JDK tarball (as tar.gz file)
+  command: curl -L  -H 'Cookie:oraclelicense=accept-securebackup-cookie'  -o {{ jdk_tarball_file }}.tar.gz  {{ jdk_tarball_url }}.tar.gz
+  args:
+    creates: "{{ java_download_path }}/{{ jdk_tarball_file }}.tar.gz"
+    chdir:   "{{ java_download_path }}"
+  when: jdk_tarball_pkg = "tar.gz"
+#
+- name: delegate to raw tarball installation
+  include: install-jdk-tarball.yml
+  when: jdk_tarball_pkg = "tar.gz"
 #

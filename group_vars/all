@@ -12,9 +12,12 @@ jenkins_repo_key_url_debian: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
 jenkins_repo_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins.repo
 jenkins_repo_key_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 #
-# 	Java JDK Oracle		#
-#	- RedHat/CentOS		#
-java_download_url: http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm
+# Java version avaliable: 1.8.0_66, 1.8.0_65, 1.8.0_60, 1.8.0_51, 1.8.0_45, 1.8.0_31, 1.7.0_80, 1.7.0_75
+java_version: "8"
+java_subversion: "66"
+#
+# jdk_tarball_pkg: "rpm" or "tar.gz"
+jdk_tarball_pkg: "rpm"
 #
 mariadb_server_root_login: "root"
 mariadb_server_root_password: "rootpasswd"
