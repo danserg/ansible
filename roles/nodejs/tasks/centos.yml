@@ -1,0 +1,18 @@
+---
+#
+- name: Add NodeJS repo
+  sudo: yes
+  yumrepo:
+    name: nodejs
+    description: NodeJS v.{{ nodejs_version }} Repository
+    baseurl: https://rpm.nodesource.com/pub_{{ nodejs_version }}/el/7/x86_64/
+#    gpgcheck: no
+    enabled: yes
+#
+- name: Install -> NodeJS
+  sudo: yes
+  yum:
+    name=nodejs
+    state=latest
+    update_cache=yes
+#

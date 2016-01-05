@@ -15,7 +15,6 @@ jenkins_repo_key_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 # Java version avaliable: 1.8.0_66, 1.8.0_65, 1.8.0_60, 1.8.0_51, 1.8.0_45, 1.8.0_31, 1.7.0_80, 1.7.0_75
 java_version: 8
 java_subversion: 66
-#
 # jdk_tarball_pkg: "rpm" or "tar.gz"
 jdk_tarball_pkg: "rpm"
 #
@@ -27,4 +26,10 @@ mariadb_bind_port: "3306"
 zabbix_repo_rhel7: http://repo.zabbix.com/zabbix/2.4/rhel/7/x86_64/zabbix-release-2.4-1.el7.noarch.rpm
 #
 timezone: Europe/Kiev
+#
+# nodejs vars
+nodejs_machine_cpu_count: 1
+nodejs_install_method: "source"   # "package" also possible
+# nodejs_version avaliable: 5.x, 4.x, 0.12
+nodejs_version: 5.x
 #
