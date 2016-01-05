@@ -26,3 +26,5 @@ mariadb_bind_port: "3306"
 #
 zabbix_repo_rhel7: http://repo.zabbix.com/zabbix/2.4/rhel/7/x86_64/zabbix-release-2.4-1.el7.noarch.rpm
 #
+timezone: Europe/Kiev
+#

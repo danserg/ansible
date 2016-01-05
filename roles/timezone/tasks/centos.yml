@@ -1,0 +1,16 @@
+---
+- name: Reload systemd
+  sudo: yes
+  command: systemctl daemon-reload
+#
+#- name:  Enable ntpd service
+#  sudo: yes
+#  command: systemctl enable ntpd
+#
+- name: Make sure ntpd is running and enabled
+  sudo: yes
+  service:
+    name=ntpd
+    state=restarted
+    enabled=yes
+#

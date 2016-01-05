@@ -11,5 +11,7 @@ common_packages:
   - iftop
   - dos2unix
   - bash-completion
-
+  - tzdata
+  - ntp
+  - ntpdate
 #

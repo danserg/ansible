@@ -1,0 +1,13 @@
+---
+#
+- name: Update the hardware clock
+  sudo: yes
+  command: dpkg-reconfigure -f noninteractive tzdata
+#
+- name: Make sure ntpd is running and enabled
+  sudo: yes
+  service:
+    name=ntp
+    state=restarted
+    enabled=yes
+#
