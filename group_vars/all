@@ -13,8 +13,8 @@ jenkins_repo_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins.repo
 jenkins_repo_key_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 #
 # Java version avaliable: 1.8.0_66, 1.8.0_65, 1.8.0_60, 1.8.0_51, 1.8.0_45, 1.8.0_31, 1.7.0_80, 1.7.0_75
-java_version: "8"
-java_subversion: "66"
+java_version: 8
+java_subversion: 66
 #
 # jdk_tarball_pkg: "rpm" or "tar.gz"
 jdk_tarball_pkg: "rpm"

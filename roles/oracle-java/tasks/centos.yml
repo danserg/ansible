@@ -35,9 +35,37 @@
   args:
     creates: "{{ java_download_path }}/{{ jdk_tarball_file }}.tar.gz"
     chdir:   "{{ java_download_path }}"
-  when: jdk_tarball_pkg = "tar.gz"
+  when: jdk_tarball_pkg == "tar.gz"
 #
 - name: delegate to raw tarball installation
   include: install-jdk-tarball.yml
-  when: jdk_tarball_pkg = "tar.gz"
+  when: jdk_tarball_pkg == "tar.gz"
+#
+- name: Update the symbolic link to the JDK install
+  sudo: yes
+  file:
+    path={{ java_package_dest }}/jdk
+    src={{ java_package_dest }}/jdk{{ jdk_version }}
+    state=link
+    force=yes
+#
+- name: Inform the system where Oracle JDK is located
+  sudo: yes
+  command: "{{ item }}"
+  with_items:
+    - update-alternatives --install "/usr/bin/java" "java" "{{ java_package_dest }}/jdk/bin/java" 1
+    - update-alternatives --install "/usr/bin/javac" "javac" "{{ java_package_dest }}/jdk/bin/javac" 1
+#    - update-alternatives --install "/usr/bin/javaws" "javaws" "{{ java_package_dest }}/jdk/bin/javaws" 1
+#    - update-alternatives --install "/usr/bin/javah" "javah" "{{ java_package_dest }}/jdk/bin/javah" 1
+#    - update-alternatives --install "/usr/bin/jar" "jar" "{{ java_package_dest }}/jdk/bin/jar" 1
+#
+- name: Inform the system that Oracle JDK must be the default
+  sudo: yes
+  command: "{{ item }}"
+  with_items:
+    - update-alternatives --set java {{ java_package_dest }}/jdk/bin/java
+    - update-alternatives --set javac {{ java_package_dest }}/jdk/bin/javac
+#    - update-alternatives --set javaws {{ java_package_dest }}/jdk/bin/javaws
+#    - update-alternatives --set javah {{ java_package_dest }}/jdk/bin/javah
+#    - update-alternatives --set jar {{ java_package_dest }}/jdk/bin/jar
 #

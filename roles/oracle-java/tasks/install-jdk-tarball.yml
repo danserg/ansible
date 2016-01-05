@@ -3,7 +3,7 @@
 - name: mkdir for Java
   sudo: yes
   file:
-    path: "/usr/java/jdk{{ jdk_version }}"
+    path: "{{ java_package_dest }}/jdk{{ jdk_version }}"
     state: directory
     owner: root
     group: root
@@ -13,7 +13,7 @@
   sudo: yes
   unarchive:
     src: "{{ java_download_path }}/{{ jdk_tarball_file }}.tar.gz"
-    dest: "/usr/java"
+    dest: "{{ java_package_dest }}"
     owner: root
     group: root
     mode: "go-w"
