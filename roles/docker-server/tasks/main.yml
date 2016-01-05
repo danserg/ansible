@@ -7,10 +7,10 @@
 #    state=directory
 #    mode=0700
 #
-- include: centos_docker_install.yml
+- include: centos.yml
   when: ansible_distribution == "CentOS"
 #
-- include: ubuntu_docker_install.yml
+- include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 #
 - name: ensure started docker-server
