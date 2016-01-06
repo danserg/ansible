@@ -1,0 +1,23 @@
+##
+# Ansible playbook for setting up a LAMP development server on Ubuntu 12.04.
+#
+
+---
+- hosts: all
+  user: root
+
+  tasks:
+    ##
+    # FTP server setup.
+    #
+    - name: FTP | vsftpd daemon package
+      action: apt pkg=vsftpd state=installed
+      tags: ftp
+
+    - name: FTP | Configuration setup
+      action: template src=templates/etc-vsftpd-conf.j2 dest=/etc/vsftpd.conf
+      tags: ftp
+
+    - name: Restart vsftpd
+      action: service name=vsftpd state=restarted
+      tags: ftp
