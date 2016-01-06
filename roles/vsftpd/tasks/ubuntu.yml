@@ -7,8 +7,9 @@
     state=latest
 #
 - name: FTP | Configuration setup
+  sudo: yes
   template:
-    src=vsftpd-conf.j2
+    src=vsftpd.conf.j2
     dest=/etc/vsftpd.conf
     owner=root
     group=root

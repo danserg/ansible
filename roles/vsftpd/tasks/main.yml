@@ -7,6 +7,7 @@
   when: ansible_distribution == "CentOS"
 #
 - name: Restart vsftpd
+  sudo: yes
   service:
     name=vsftpd
     state=restarted
