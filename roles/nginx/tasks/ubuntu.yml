@@ -1,0 +1,22 @@
+---
+#
+- name: modify apt-key
+  sudo: yes
+  apt_key:
+    url: "http://nginx.org/keys/nginx_signing.key"
+#
+- name: modify repository
+  sudo: yes
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - "deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx"
+    - "deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx"
+#
+- name: install
+  sudo: yes
+  apt:
+    name: nginx
+    state: present
+#
