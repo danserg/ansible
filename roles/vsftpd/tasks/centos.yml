@@ -1,0 +1,8 @@
+---
+#
+- name: CentOS | Install vsftpd from yum repository
+  sudo: yes
+  yum:
+    name=vsftpd
+    state=latest
+#

@@ -1,0 +1,8 @@
+---
+#
+- name: Ubuntu | install vsftpd
+  sudo: yes
+  apt:
+    name=vsftpd
+    state=latest
+#
