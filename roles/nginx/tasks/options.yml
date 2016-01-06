@@ -1,15 +1,11 @@
-- name: modify geocountry.conf
-  copy:
-    src: geocountry.conf
-    dest: /etc/nginx/geocountry.conf
-    owner: root
-    group: root
-    mode: 0644
-
+---
+#
 - name: modify self-signed certificate
+  sudo: yes
   copy:
-    src: ssl
-    dest: /etc/nginx
-    owner: root
-    group: root
-    mode: 0755
+    src=ssl
+    dest={{ nginx_dir }}
+    owner=root
+    group=root
+    mode=0755
+#

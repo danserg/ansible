@@ -1,0 +1,11 @@
+server {
+  listen   80;
+  server_name  www.{{ ansible_fqdn }} {{ ansible_fqdn }};
+
+  access_log  {{ nginx_log_dir }}/access.log;
+
+  location / {
+    root   {{ nginx_www_dir }}/default;
+    index  index.html index.htm;
+  }
+}
