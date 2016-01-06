@@ -1,14 +1,11 @@
 ---
 # file: roles/nodejs/tasks/main.yml
 #
-#- include: ubuntu.yml
-#  when: ansible_distribution == "Ubuntu"
+- include: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
 #
 - include: centos.yml
   when: ansible_distribution == "CentOS"
 #
 #- include: source_install.yml
 #  when: nodejs_install_method == "source"
-#- include: package_install.yml
-#  when: nodejs_install_method == "package"
-#
