@@ -1,6 +1,6 @@
 ---
 #
-- name: Add NodeJS repo
+- name: CentOS | Add NodeJS repo
   sudo: yes
   yumrepo:
     name: nodejs
@@ -9,7 +9,7 @@
 #    gpgcheck: no
     enabled: yes
 #
-- name: Install -> NodeJS
+- name: CentOS | Install -> NodeJS
   sudo: yes
   yum:
     name=nodejs

@@ -1,15 +1,15 @@
 ---
 #
-- name: Add Repo -> Oracle Java
+- name: Ubuntu | Add Repo -> Oracle Java
   sudo: yes
   apt_repository:
     repo='ppa:webupd8team/java'
 #
-- name: Autoaccept -> license for java
+- name: Ubuntu | Autoaccept -> license for java
   sudo: yes
   shell: executable=/bin/bash debconf-set-selections <<< "oracle-java7-installer shared/accepted-oracle-license-v1-1 select true"
 #
-- name: Install -> Oracle Java
+- name: Ubuntu | Install -> Oracle Java
   sudo: yes
   apt:
     name={{ java_name_pkg }}

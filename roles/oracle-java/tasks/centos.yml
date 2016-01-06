@@ -1,47 +1,47 @@
 ---
 #
-- name: Remove -> OpenJDK
+- name: CentOS | Remove -> OpenJDK
   sudo: yes
   yum:
     pkg=java-1.*.0-openjdk
     state=absent
 #
-- name: precondition - java_version
+- name: CentOS | precondition - java_version
   fail: msg="ERROR - required variable 'java_version' missing."
   when: java_version is not defined
 #
-- name: precondition - java_subversion
+- name: CentOS | precondition - java_subversion
   fail: msg="ERROR - required variable 'java_subversion' missing."
   when: java_subversion is not defined
 #
 - include: set-role-variables.yml
 #
-- name: get JDK tarball (as RPM file)
+- name: CentOS | get JDK tarball (as RPM file)
   command: curl -L  -H 'Cookie:oraclelicense=accept-securebackup-cookie'  -o {{ jdk_tarball_file }}.rpm  {{ jdk_tarball_url }}.rpm
   args:
     creates: "{{ java_download_path }}/{{ jdk_tarball_file }}.rpm"
     chdir:   "{{ java_download_path }}"
   when: jdk_tarball_pkg == "rpm"
 #
-- name: install JDK via RPM file
+- name: CentOS | install JDK via RPM file
   sudo: yes
   yum:
     name: "{{ java_download_path }}/{{ jdk_tarball_file }}.rpm"
     state: present
   when: jdk_tarball_pkg == "rpm"
 #
-- name: get JDK tarball (as tar.gz file)
+- name: CentOS | get JDK tarball (as tar.gz file)
   command: curl -L  -H 'Cookie:oraclelicense=accept-securebackup-cookie'  -o {{ jdk_tarball_file }}.tar.gz  {{ jdk_tarball_url }}.tar.gz
   args:
     creates: "{{ java_download_path }}/{{ jdk_tarball_file }}.tar.gz"
     chdir:   "{{ java_download_path }}"
   when: jdk_tarball_pkg == "tar.gz"
 #
-- name: delegate to raw tarball installation
+- name: CentOS | delegate to raw tarball installation
   include: install-jdk-tarball.yml
   when: jdk_tarball_pkg == "tar.gz"
 #
-- name: Update the symbolic link to the JDK install
+- name: CentOS | Update the symbolic link to the JDK install
   sudo: yes
   file:
     path={{ java_package_dest }}/jdk
@@ -49,7 +49,7 @@
     state=link
     force=yes
 #
-- name: Inform the system where Oracle JDK is located
+- name: CentOS | Inform the system where Oracle JDK is located
   sudo: yes
   command: "{{ item }}"
   with_items:
@@ -59,7 +59,7 @@
 #    - update-alternatives --install "/usr/bin/javah" "javah" "{{ java_package_dest }}/jdk/bin/javah" 1
 #    - update-alternatives --install "/usr/bin/jar" "jar" "{{ java_package_dest }}/jdk/bin/jar" 1
 #
-- name: Inform the system that Oracle JDK must be the default
+- name: CentOS | Inform the system that Oracle JDK must be the default
   sudo: yes
   command: "{{ item }}"
   with_items:

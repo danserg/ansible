@@ -1,11 +1,11 @@
 ---
 #
-- name: Disable SELinux
+- name: CentOS | Disable SELinux
   sudo: yes
   selinux:
     state: disabled
 #
-- name: Add CentOS docker repo
+- name: CentOS | Add CentOS docker repo
   sudo: yes
   yumrepo:
     name: docker
@@ -15,7 +15,7 @@
     gpgkey: https://yum.dockerproject.org/gpg
     enabled: yes
 #
-- name: Install -> Docker on CentOS
+- name: CentOS | Install -> Docker on CentOS
   sudo: yes
   yum:
     name={{ item }}
@@ -25,7 +25,7 @@
     - docker-engine
     - docker-python
 #
-- name: Configure docker unit
+- name: CentOS | Configure docker unit
   sudo: yes
   template:
     src=docker.service.j2
@@ -33,7 +33,7 @@
     mode=0644
   register: unit
 #
-- name: Reload systemd
+- name: CentOS | Reload systemd
   sudo: yes
   command: systemctl daemon-reload
   when: unit|changed

@@ -1,6 +1,6 @@
 ---
 #
-- name: Add Nginx repo
+- name: CentOS | Add Nginx repo
   sudo: yes
   yumrepo:
     name: nginx
@@ -10,7 +10,7 @@
     gpgcheck: yes
     enabled: yes
 #
-- name: Install nginx from yum repository
+- name: CentOS | Install nginx from yum repository
   sudo: yes
   yum:
     name=nginx

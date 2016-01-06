@@ -1,8 +1,6 @@
+---
 #
-- name: Debug
-  debug: msg="{{ ansible_os_family }}"
-#
-- name: Upgrade -> all packages to the latest version
+- name: CentOS | Upgrade -> all packages to the latest version
   sudo: yes
   yum:
     name=*

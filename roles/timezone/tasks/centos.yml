@@ -1,5 +1,6 @@
 ---
-- name: Reload systemd
+#
+- name: CentOS | Reload systemd
   sudo: yes
   command: systemctl daemon-reload
 #
@@ -7,7 +8,7 @@
 #  sudo: yes
 #  command: systemctl enable ntpd
 #
-- name: Make sure ntpd is running and enabled
+- name: CentOS | Make sure ntpd is running and enabled
   sudo: yes
   service:
     name=ntpd

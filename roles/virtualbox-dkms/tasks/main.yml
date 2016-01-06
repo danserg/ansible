@@ -1,7 +1,7 @@
 ---
 # tasks file for dkms
 
-- name: Installing -> kernel-devel (CentOS)
+- name: CentOS | Installing -> kernel-devel (CentOS)
   yum:
     pkg={{item}}
     state=present
