@@ -1,0 +1,48 @@
+---
+#
+- name: download consul Server
+  get_url:
+    url="{{ consul_server_url }}"
+    dest="/tmp/{{ consul_server_package }}.zip"
+#
+- name: create /opt/consul-ver
+  sudo: yes
+  file: >
+    path='/opt/consul-{{ consul_ver }}'
+    owner={{ consul_user }}
+    group={{ consul_group }}
+    mode='go-w'
+    state=directory
+#
+- name: link consul...
+  sudo: yes
+  file: >
+    src="/opt/consul-{{ consul_ver }}"
+    dest="{{ consul_home_dir }}"
+    state=link
+#
+- name: Creating the Consul Agent Directories Structure
+  sudo: yes
+  file: >
+    path={{ item }}
+    state=directory
+    owner={{ consul_user }}
+    group={{ consul_group }}
+    mode=0750
+  with_items:
+    - "{{ consul_bin_dir }}"
+    - "{{ consul_conf_dir }}"
+    - "{{ consul_data_dir }}"
+    - "{{ consul_log_dir }}"
+    - "{{ consul_web_ui_dir }}"
+#
+- name: unarchive consul...
+  sudo: yes
+  unarchive: >
+    src="/tmp/{{ consul_server_package }}.zip"
+    dest="{{ consul_bin_dir }}"
+    owner={{ consul_user }}
+    group={{ consul_group }}
+    mode=0750
+    copy=no
+#

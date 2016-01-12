@@ -1,0 +1,23 @@
+---
+#
+- name: Generating a Key For the Encryption Protocol
+  shell: head -c16 /dev/urandom | base64
+  register: key
+  run_once: true
+#
+- name: Save Key To the Global Variable
+  set_fact: consul_encryption_key="{{ key.stdout }}"
+  run_once: true
+#
+#
+- name: consul config file
+  sudo: yes
+  template: >
+    src=consul.conf.j2
+    dest={{ consul_conf_file }}
+    owner={{consul_user}}
+    group={{consul_group}}
+    mode=0755
+  notify:
+    - restart consul
+#

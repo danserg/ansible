@@ -1,0 +1,58 @@
+---
+#
+- name: download consul web_ui
+  get_url: >
+    url={{ consul_web_ui_url }}
+    dest=/tmp/{{ consul_web_ui_package }}.zip
+#
+- name: unarchive consul web_ui
+  sudo: yes
+  unarchive: >
+    src="/tmp/{{ consul_web_ui_package }}.zip"
+    dest="{{ consul_web_ui_dir }}"
+    owner={{ consul_user }}
+    group={{ consul_group }}
+    copy=no
+#
+#- name: consul nginx config
+#  template: >
+#    src={{consul_ui_nginx_template}}
+#    dest=/etc/nginx/sites-available/consul
+#    owner=root
+#    group=root
+#    mode=0755
+#  when: ansible_os_family == "Debian"
+#  notify:
+#    - restart nginx
+#
+#- name: consul nginx config
+#  file: >
+#    state=link
+#    src=/etc/nginx/sites-available/consul
+#    path=/etc/nginx/sites-enabled/consul
+#    owner=root
+#    group=root
+#    mode=0755
+#  when: ansible_os_family == "Debian"
+#  notify:
+#  - restart nginx
+#
+#- name: consul nginx config
+#  template: >
+#    src={{consul_ui_nginx_template}}
+#    dest=/etc/nginx/conf.d/consul.conf
+#    owner=root
+#    group=root
+#    mode=0755
+#  when: ansible_os_family == "RedHat"
+#
+#- name: create nginx home
+#  file: >
+#    state=directory
+#    path=/var/www/consul/htdocs
+#    owner=root
+#    group=root
+#    mode=0755
+#  notify:
+#    - restart nginx
+#
