@@ -9,14 +9,23 @@
   set_fact: consul_encryption_key="{{ key.stdout }}"
   run_once: true
 #
+#- name: copy over certificates and keys for security
+#  copy: >
+#    src='{{ item.name }}'
+#    dest='{{ item.dest }}'
+#    mode=600
+#  with_items:
+#    - {name: 'consul_ca.crt', dest: '{{ consul_ca_file }}'}
+#    - {name: 'consul.crt', dest: '{{ consul_cert_file }}'}
+#    - {name: 'consul.key', dest: '{{ consul_key_file }}'}
 #
 - name: consul config file
   sudo: yes
   template: >
-    src=consul.conf.j2
+    src=consul.json.j2
     dest={{ consul_conf_file }}
-    owner={{consul_user}}
-    group={{consul_group}}
+    owner={{ consul_user }}
+    group={{ consul_group }}
     mode=0755
   notify:
     - restart consul

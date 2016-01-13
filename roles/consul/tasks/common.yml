@@ -1,5 +1,17 @@
 ---
 #
+- name: create consul group
+  sudo: yes
+  group: >
+    name={{consul_group}}
+    state=present
+#
+- name: create consul user
+  sudo: yes
+  user: >
+    name={{consul_user}}
+    group={{consul_group}}
+#
 - name: download consul Server
   get_url:
     url="{{ consul_server_url }}"
@@ -11,7 +23,7 @@
     path='/opt/consul-{{ consul_ver }}'
     owner={{ consul_user }}
     group={{ consul_group }}
-    mode='go-w'
+    mode=0750
     state=directory
 #
 - name: link consul...
@@ -35,6 +47,7 @@
     - "{{ consul_data_dir }}"
     - "{{ consul_log_dir }}"
     - "{{ consul_web_ui_dir }}"
+    - "{{ consul_cert_dir }}"
 #
 - name: unarchive consul...
   sudo: yes

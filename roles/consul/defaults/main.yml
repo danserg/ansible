@@ -8,8 +8,12 @@ consul_server_url: "{{ consul_mirror }}/{{ consul_ver }}/{{ consul_server_packag
 consul_web_ui_package: "consul_{{ consul_ver }}_web_ui"
 consul_web_ui_url: "{{ consul_mirror }}/{{ consul_ver }}/{{ consul_web_ui_package }}.zip"
 #
-consul_user: root
-consul_group: root
+consul_dependency:
+  - unzip
+  - jq
+#
+consul_user: consul
+consul_group: consul
 #
 consul_home_dir: "/opt/consul"
 consul_bin_dir: "{{ consul_home_dir }}/bin"
@@ -17,16 +21,31 @@ consul_data_dir: "{{ consul_home_dir }}/data"
 consul_log_dir: "{{ consul_home_dir }}/log"
 consul_web_ui_dir: "{{ consul_home_dir }}/dist"
 consul_conf_dir: "{{ consul_home_dir }}/consul.d"
-consul_conf_file: "{{ consul_home_dir }}/consul.conf"
+consul_conf_file: "{{ consul_home_dir }}/consul.json"
 #
-consul_cert_file: "{{ consul_home_dir }}/cert/consul.crt",
-consul_key_file: "{{ consul_home_dir }}/cert/consul.key",
-consul_ca_file: "{{ consul_home_dir }}/cert/ca.crt",
-
+# TSL
+consul_cert_dir: "{{ consul_home_dir }}/cert"
+#consul_cert_file: "{{ consul_cert_dir }}/consul.crt",
+#consul_key_file: "{{ consul_cert_dir }}/consul.key",
+#consul_ca_file: "{{ consul_cert_dir }}/ca.crt",
 #
-consul_is_ui: true
+# config settings
 consul_is_server: true
+consul_is_ui: true
+consul_datacenter: "dc1"
+consul_node_name: "{{ inventory_hostname }}"
+consul_log_level: "INFO"
+consul_syslog: false
 #
+# network
+consul_bind_address: "{{ ansible_default_ipv4['address'] }}"
+consul_servers: ['127.0.0.1']
+consul_dynamic_bind: false
+consul_client_address: "127.0.0.1"
+consul_client_address_bind: false
+#
+# DNS
+consul_domain: "consul."
 consul_dns_config: false
 consul_dns_allow_stale: false
 consul_dns_max_stale: 5s
@@ -35,23 +54,13 @@ consul_dns_service_ttl: 0s
 consul_dns_enable_truncate: false
 consul_dns_only_passing: false
 #
-consul_domain: "consul."
-#
-consul_servers: ['127.0.0.1']
-consul_log_level: "INFO"
-consul_syslog: false
+# join
+consul_bootstrap_expect: 1
 consul_rejoin_after_leave: true
-consul_leave_on_terminate: false
 consul_join_at_start: false
+consul_leave_on_terminate: false
 #
-consul_bind_address: "{{ ansible_default_ipv4['address'] }}"
-consul_dynamic_bind: false
-consul_client_address: "127.0.0.1"
-#
-consul_client_address_bind: false
-consul_datacenter: "default"
-consul_disable_remote_exec: true
-#
+# Ports
 consul_port_dns: 8600
 consul_port_http: 8500
 consul_port_https: -1
@@ -60,7 +69,8 @@ consul_port_serf_lan: 8301
 consul_port_serf_wan: 8302
 consul_port_server: 8300
 #
-consul_install_dnsmasq: false
+# Others
+consul_disable_remote_exec: true
 consul_install_consulate: false
+consul_install_dnsmasq: false
 #
-consul_node_name: "{{ inventory_hostname }}"

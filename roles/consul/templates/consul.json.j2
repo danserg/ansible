@@ -69,7 +69,6 @@
 {% if consul_is_server == false and consul_cert_file is defined and consul_key_file is defined and consul_ca_file is defined %}
   "cert_file": "{{ consul_cert_file }}",
   "key_file": "{{ consul_key_file }}",
-  "ca_file": "{{ consul_ca_file }}",
   "verify_outgoing": true,
 {% endif %}
   "ports": {

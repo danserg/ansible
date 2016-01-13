@@ -43,12 +43,7 @@
 #    name=consul
 #    enabled=yes
 #
-- name: add consul to path through profile.d
+- name: make consul available on the path
   sudo: yes
-  template: >
-    src=consul.sh.j2
-    dest=/etc/profile.d/consul.sh
-    owner=root
-    group=root
-    mode=0755
+  command: update-alternatives --install "/usr/bin/consul" "consul" "{{consul_dir}}/bin/consul" 100
 #
