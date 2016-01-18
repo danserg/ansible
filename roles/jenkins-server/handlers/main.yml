@@ -1,6 +1,7 @@
 ---
-
+#
 - name: Restart Jenkins
   service:
-	name=jenkins
-	state=restarted
+	   name=jenkins
+	   state=restarted
+

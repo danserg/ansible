@@ -2,28 +2,28 @@
 - name: Update Jenkins plugin data.
   shell: >
     curl -L https://updates.jenkins-ci.org/update-center.json | sed '1d;$d' > {{jenkins_home_dir}}/updates/default.json
-    creates={{jenkins_home_dir}}/updates/default.json
+    creates={{ jenkins_home_dir }}/updates/default.json
 #----------------------
 - name: Permissions for default.json updates info.
   file:
-    path: {{jenkins_home_dir}}/updates/default.json
-    owner={{jenkins_user}}
-    group={{jenkins_group}}
+    path: {{ jenkins_home_dir }}/updates/default.json
+    owner={{ jenkins_user }}
+    group={{ jenkins_group }}
     mode=0755
 #----------------------
 - name: Install Jenkins plugins.
   shell: >
-    {{jenkins_java}} -jar {{jenkins_client}} -s {{jenkins_url}} install-plugin {{ item }}
+    {{ jenkins_java }} -jar {{ jenkins_client }} -s {{ jenkins_url }} install-plugin {{ item }}
   with_items: jenkins_plugins
   notify:
     - Restart Jenkins
 #----------------------
 - name: List plugins to be updated
-  action: shell java -jar {{jenkins_client}} -s {{jenkins_url}} list-plugins | grep ')$' | awk '{print $1}'
+  action: shell java -jar {{ jenkins_client }} -s {{ jenkins_url }} list-plugins | grep ')$' | awk '{print $1}'
   register: plugins_updates
 #----------------------
 - name: Update plugins
-  action: command java -jar {{jenkins_client}} -s {{jenkins_url}} install-plugin {{plugins_updates.stdout_lines}}
+  action: command java -jar {{ jenkins_client }} -s {{ jenkins_url }} install-plugin {{ plugins_updates.stdout_lines }}
   when: plugins_updates.stdout_lines != ''
   notify:
     - Restart Jenkins

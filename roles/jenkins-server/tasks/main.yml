@@ -16,7 +16,7 @@
 - name: Register Jenkins service
   template:
     src: jenkins-default.j2
-    dest: {{jenkins_configuration}}
+    dest: {{ jenkins_configuration }}
   notify:
     - Restart Jenkins
 #----------------------

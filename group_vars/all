@@ -4,13 +4,6 @@ ansible_ssh_user: aau
 #	Docker	#
 compose_version: "1.5.2"
 #
-#	Jenkins Repo	#
-#	- Debian/Ubuntu		#
-jenkins_repo_url_debian: deb http://pkg.jenkins-ci.org/debian binary/
-jenkins_repo_key_url_debian: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
-#	- RedHat/CentOS		#
-jenkins_repo_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins.repo
-jenkins_repo_key_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 #
 # Java version avaliable: 1.8.0_66, 1.8.0_65, 1.8.0_60, 1.8.0_51, 1.8.0_45, 1.8.0_31, 1.7.0_80, 1.7.0_75
 java_version: 8

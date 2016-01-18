@@ -1,3 +1,12 @@
+---
+#
+#	Jenkins Repo	#
+#	- Debian/Ubuntu		#
+jenkins_repo_url_debian: deb http://pkg.jenkins-ci.org/debian binary/
+jenkins_repo_key_url_debian: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
+#	- RedHat/CentOS		#
+jenkins_repo_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins.repo
+jenkins_repo_key_url_redhat: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
 #
 - include_vars: jenkins-plugins.yml
 #----------------------
@@ -12,13 +21,13 @@ jenkins_pid_dir: /var/run
 jenkins_cache_dir: /var/cache/jenkins
 jenkins_work_dir: /opt/work
 #----------------------
-jenkins_war: "{{jenkins_root_dir}}/jenkins.war"
-jenkins_client: {{jenkins_cache_dir}}/war/WEB-INF/jenkins-cli.jar
+jenkins_war: "{{ jenkins_root_dir }}/jenkins.war"
+jenkins_client: {{ jenkins_cache_dir }}/war/WEB-INF/jenkins-cli.jar
 #----------------------
-jenkins_http_host: "{{ansible_hostname}}"   # Set HTTP host
+jenkins_http_host: "{{ ansible_hostname }}"   # Set HTTP host
 jenkins_http_port: 8000                     # Set HTTP port
 jenkins_prefix: "/"
-jenkins_url: http://{{jenkins_http_host}}:{{jenkins_http_port}}{{jenkins_prefix}}
+jenkins_url: http://{{ jenkins_http_host }}:{{ jenkins_http_port }}{{ jenkins_prefix }}
 #----------------------
 jenkins_maxopenfiles: 65535                 # Increase files limit
 jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins user (path to local file)
