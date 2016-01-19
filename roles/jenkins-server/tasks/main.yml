@@ -1,31 +1,35 @@
 ---
+#
 # Setup/install tasks.
 - include: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
-
+#
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
-#----------------------
- Make sure Jenkins starts, then configure Jenkins.
+#
+# Make sure Jenkins starts, then configure Jenkins.
 - name: Ensure Jenkins is started and runs on startup.
+  sudo: yes
   service:
     name=jenkins
-    state=present
+    state=started
     enabled=yes
-#----------------------
+#
 - name: Register Jenkins service
+  sudo: yes
   template:
-    src: jenkins-default.j2
-    dest: {{ jenkins_configuration }}
+    src=jenkins-default.j2
+    dest={{ jenkins_configuration }}
   notify:
     - Restart Jenkins
-#----------------------
-- name: Configure log rotation
+#
+- name: "Configure log rotation"
+  sudo: yes
   template:
-	src=logrotate.conf.j2
-	dest=/etc/logrotate.d/jenkins.conf
-#----------------------
-- include: ssh.yml
-#----------------------
+    src=logrotate.conf.j2
+    dest=/etc/logrotate.d/jenkins.conf
+#
+#- include: ssh.yml
+#
 - include: plugins.yml
-#----------------------
+#

@@ -1,24 +1,26 @@
 ---
-
+#
 - name: make sure {{ jenkins_home_dir }}/.ssh exists
+  sudo: yes
   file: >
     path={{ jenkins_home }}/.ssh
     owner={{ jenkins_user }}
     group={{ jenkins_group }}
     mode=0700
     state=directory
-
+#
 - name: jenkins-ssh | Copy private key
+  sudo: yes
   copy: >
-    src={{ ssh_item }}
-    dest={{ jenkins_home_dir }}/.ssh/{{ ssh_item }}
+    src={{ item }}
+    dest={{ jenkins_home_dir }}/.ssh/{{ item }}
     owner={{ jenkins_user }}
     group={{ jenkins_group }}
     mode=0600
 	with_items:
-		- jenkins_id_rsa
-		- jenkins_id_rsa.pub
-
+  - "jenkins_id_rsa"
+  - "jenkins_id_rsa.pub"
+#
 #- name: jenkins-ssh | Setup SSH hosts
 #  lineinfile: >
 #    line="{{ item }}"
@@ -28,3 +30,4 @@
 #    mode="0644"
 #    dest="{{ jenkins_home_dir }}/.ssh/known_hosts"
 #    owner="{{ jenkins_user }}"
+#
