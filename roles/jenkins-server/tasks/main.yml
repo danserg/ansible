@@ -27,7 +27,7 @@
   sudo: yes
   template:
     src=logrotate.conf.j2
-    dest=/etc/logrotate.d/jenkins.conf
+    dest=/etc/logrotate.d/jenkins
 #
 #- include: ssh.yml
 #

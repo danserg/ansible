@@ -17,19 +17,19 @@
 - name: Install Jenkins plugins.
   sudo: yes
   shell: >
-    {{ jenkins_java }} -jar {{ jenkins_client }} -s {{ jenkins_url }} install-plugin {{ item }}
+    {{ jenkins_java }} -jar {{ jenkins_cli }} -s {{ jenkins_url }} install-plugin {{ item }}
   with_items: jenkins_plugins
   notify:
     - Restart Jenkins
 #
 - name: List plugins to be updated
   sudo: yes
-  action: shell java -jar {{ jenkins_client }} -s {{ jenkins_url }} list-plugins | grep ')$' | awk '{print $1}'
+  action: shell java -jar {{ jenkins_cli }} -s {{ jenkins_url }} list-plugins | grep ')$' | awk '{print $1}'
   register: plugins_updates
 #
 - name: Update plugins
   sudo: yes
-  action: command java -jar {{ jenkins_client }} -s {{ jenkins_url }} install-plugin {{ plugins_updates.stdout_lines }}
+  action: command java -jar {{ jenkins_cli }} -s {{ jenkins_url }} install-plugin {{ plugins_updates.stdout_lines }}
   when: plugins_updates.stdout_lines != ''
   notify:
     - Restart Jenkins

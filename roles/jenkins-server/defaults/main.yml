@@ -20,7 +20,7 @@ jenkins_cache_dir: /var/cache/jenkins
 jenkins_work_dir: /opt/work
 #
 jenkins_war: "{{ jenkins_root_dir }}/jenkins.war"
-jenkins_client: "{{ jenkins_cache_dir }}/war/WEB-INF/jenkins-cli.jar"
+jenkins_cli: "{{ jenkins_cache_dir }}/war/WEB-INF/jenkins-cli.jar"
 #
 jenkins_http_host: "{{ ansible_hostname }}"   # Set HTTP host
 jenkins_http_port: 8080                     # Set HTTP port
@@ -47,6 +47,7 @@ jenkins_logrotate_options:
   - dateext
   - rotate 7
   - size 10M
+  - create 644
 #
 jenkins_plugins:
   - 'reverse-proxy-auth-plugin'
