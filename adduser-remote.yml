@@ -10,7 +10,7 @@
       yum: 
         pkg={{remote_pkg_name}}
         state=present
-      when: ansible_distribution == "CentOS" or ansible_distribution == "RedHat"
+      when: ansible_distribution in [ 'CentOS', 'RedHat' ]
 
     - name: Create -> Ansible Admin User
       user:

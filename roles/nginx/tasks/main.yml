@@ -1,10 +1,10 @@
 ---
 #
 #- include: ubuntu.yml
-#  when: ansible_distribution == "Ubuntu"
+#  when: ansible_distribution in [ 'Debian', 'Ubuntu' ]
 #
 #- include: centos.yml
-#  when: ansible_distribution == "CentOS"
+#  when: ansible_distribution in [ 'CentOS', 'RedHat' ]
 #
 - include: conf_dirs.yml
 #

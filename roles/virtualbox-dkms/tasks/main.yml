@@ -8,7 +8,7 @@
   with_items:
     - "{{dkms_pkg_name}}"
     - kernel-devel-{{ansible_kernel}}
-  when: ansible_distribution == "CentOS"
+  when: ansible_distribution in [ 'CentOS', 'RedHat' ]
 
 - name: Installing -> kernel-devel (Ubuntu)
   apt:
@@ -16,7 +16,7 @@
     state=present
   with_items:
     - "{{dkms_pkg_name}}"
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_distribution in [ 'Debian', 'Ubuntu' ]
 
 - name: Copy -> VBoxLinuxAdditions.run
   copy:
