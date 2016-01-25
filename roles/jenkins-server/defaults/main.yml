@@ -14,7 +14,7 @@ jenkins_group: jenkins
 #
 jenkins_configuration: /etc/default/jenkins
 jenkins_home_dir: /var/lib/jenkins              # Jenkins home location
-jenkins_root_dir: /usr/share/jenkins            # Location of jenkins arch indep files
+jenkins_root_dir: /usr/lib/jenkins            # Location of jenkins arch indep files
 jenkins_pid_dir: /var/run
 jenkins_cache_dir: /var/cache/jenkins
 jenkins_work_dir: /opt/work
@@ -25,7 +25,8 @@ jenkins_cli: "{{ jenkins_cache_dir }}/war/WEB-INF/jenkins-cli.jar"
 jenkins_http_host: "{{ ansible_hostname }}"   # Set HTTP host
 jenkins_http_port: 8080                     # Set HTTP port
 jenkins_prefix: "/"
-jenkins_url: http://{{ jenkins_http_host }}:{{ jenkins_http_port }}{{ jenkins_prefix }}
+jenkins_base_url: "http://{{ jenkins_http_host }}:{{ jenkins_http_port }}"
+jenkins_url: "{{ jenkins_base_url }}{{ jenkins_prefix }}"
 #
 jenkins_maxopenfiles: 65535                 # Increase files limit
 jenkins_ssh_key_file: ""                    # Set private ssh key for Jenkins user (path to local file)
@@ -48,6 +49,10 @@ jenkins_logrotate_options:
   - rotate 7
   - size 10M
   - create 644
+#
+# Jenkins waiting availability test
+jenkins_waiting_available_retries: 10
+jenkins_waiting_available_delay: 5
 #
 jenkins_plugins:
   - 'reverse-proxy-auth-plugin'

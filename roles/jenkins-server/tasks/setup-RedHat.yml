@@ -1,26 +1,26 @@
 ---
 #
 - name: Ensure dependencies are installed.
-  sudo: yes
+  become: true
   yum:
     pkg=curl
     state=installed
 #
 - name: Ensure Jenkins repo is installed.
-  sudo: yes
+  become: true
   get_url:
     url: "{{ jenkins_repo_url_redhat }}"
     dest: /etc/yum.repos.d/jenkins.repo
 #
 - name: Add Jenkins repo GPG key.
-  sudo: yes
+  become: true
   rpm_key:
     key: "{{ jenkins_repo_key_url_redhat }}"
     state: present
 #
 - name: Ensure Jenkins is installed.
-  sudo: yes
+  become: true
   yum:
-    pkg=jenkins
+    pkg=jenkins{{ jenkins_version }}
     state=installed
 #

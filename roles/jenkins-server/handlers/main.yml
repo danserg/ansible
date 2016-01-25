@@ -1,7 +1,9 @@
 ---
 #
 - name: Restart Jenkins
+  become: true
   service:
-    name=jenkins
+    name={{ jenkins_name }}
     state=restarted
 #
+
