@@ -30,4 +30,4 @@ consul_ver: "0.6.1"
 consul_mirror: "https://releases.hashicorp.com/consul"
 #
 # Jenkins Version
-jenkins_version: "-1.645-*"
+jenkins_version: "1.645"

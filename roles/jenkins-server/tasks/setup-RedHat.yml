@@ -21,6 +21,6 @@
 - name: Ensure Jenkins is installed.
   become: true
   yum:
-    pkg=jenkins{{ jenkins_version }}
+    pkg=jenkins-{{ jenkins_version }}-*
     state=installed
 #

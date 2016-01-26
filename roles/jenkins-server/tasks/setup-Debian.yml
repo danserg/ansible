@@ -22,6 +22,6 @@
 - name: Ensure Jenkins is installed.
   sudo: yes
   apt:
-    pkg=jenkins
+    pkg=jenkins={{ jenkins_version }}
     state=installed
 #
