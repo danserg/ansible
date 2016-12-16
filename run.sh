@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook  pb-remote.yml
+ansible-playbook  aws-remote.yml --ask-vault-pass
