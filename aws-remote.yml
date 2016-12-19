@@ -5,5 +5,7 @@
   vars_files:
     - "aws-test-key.yml"
   roles:
-   - ec2
+#   - ec2_gather_facts
+   - ec2_start_instances
+
 
